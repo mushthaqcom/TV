@@ -90,22 +90,43 @@
                 </div>
             </div>
 
-            <!-- Player Controls -->
-            <div class="bg-gray-800 p-4 flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <button id="prevChannel" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">
-                        ⏮️ Previous
-                    </button>
-                    <button id="nextChannel" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">
-                        Next ⏭️
-                    </button>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button id="muteButton" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">
+            <!-- Desktop Player Controls -->
+            <div class="bg-gray-800 p-6 flex items-center justify-center space-x-6 hidden md:flex">
+                <button id="prevChannel" class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl text-lg font-semibold transition-colors">
+                    ⏮️ Previous Channel
+                </button>
+                <button id="playStopButton" class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-xl text-lg font-semibold transition-colors">
+                    ⏸️ Stop
+                </button>
+                <button id="nextChannel" class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl text-lg font-semibold transition-colors">
+                    Next Channel ⏭️
+                </button>
+                <button id="muteButton" class="bg-red-600 hover:bg-red-700 px-8 py-4 rounded-xl text-lg font-semibold transition-colors">
+                    🔊 Mute
+                </button>
+            </div>
+
+            <!-- Mobile Player Controls -->
+            <div class="bg-gray-800 p-8 flex md:hidden items-center justify-center">
+                <div class="relative w-48 h-48">
+                    <!-- Top - Volume -->
+                    <button id="muteButtonMobile" class="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-2xl transition-colors">
                         🔊
                     </button>
-                    <button id="fullscreenButton" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">
-                        ⛶ Fullscreen
+                    
+                    <!-- Left - Previous -->
+                    <button id="prevChannelMobile" class="absolute left-0 top-1/2 transform -translate-y-1/2 w-16 h-16 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-2xl transition-colors">
+                        ⏮️
+                    </button>
+                    
+                    <!-- Center - Play/Stop -->
+                    <button id="playStopButtonMobile" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center text-3xl transition-colors">
+                        ⏸️
+                    </button>
+                    
+                    <!-- Right - Next -->
+                    <button id="nextChannelMobile" class="absolute right-0 top-1/2 transform -translate-y-1/2 w-16 h-16 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-2xl transition-colors">
+                        ⏭️
                     </button>
                 </div>
             </div>
@@ -153,13 +174,30 @@
                     this.nextChannel();
                 });
 
-                // Player controls
+                // Desktop Player controls
                 document.getElementById('muteButton').addEventListener('click', () => {
                     this.toggleMute();
                 });
 
-                document.getElementById('fullscreenButton').addEventListener('click', () => {
-                    this.toggleFullscreen();
+                document.getElementById('playStopButton').addEventListener('click', () => {
+                    this.togglePlayStop();
+                });
+
+                // Mobile Player controls
+                document.getElementById('muteButtonMobile').addEventListener('click', () => {
+                    this.toggleMute();
+                });
+
+                document.getElementById('playStopButtonMobile').addEventListener('click', () => {
+                    this.togglePlayStop();
+                });
+
+                document.getElementById('prevChannelMobile').addEventListener('click', () => {
+                    this.previousChannel();
+                });
+
+                document.getElementById('nextChannelMobile').addEventListener('click', () => {
+                    this.nextChannel();
                 });
 
                 document.getElementById('retryButton').addEventListener('click', () => {
@@ -177,6 +215,16 @@
 
                 this.player.addEventListener('error', () => {
                     this.showError();
+                });
+
+                this.player.addEventListener('play', () => {
+                    document.getElementById('playStopButton').innerHTML = '⏸️ Stop';
+                    document.getElementById('playStopButtonMobile').textContent = '⏸️';
+                });
+
+                this.player.addEventListener('pause', () => {
+                    document.getElementById('playStopButton').innerHTML = '▶️ Play';
+                    document.getElementById('playStopButtonMobile').textContent = '▶️';
                 });
 
                 // Keyboard shortcuts
@@ -379,16 +427,22 @@
 
             toggleMute() {
                 this.player.muted = !this.player.muted;
-                document.getElementById('muteButton').textContent = this.player.muted ? '🔇' : '🔊';
+                const muteIcon = this.player.muted ? '🔇' : '🔊';
+                document.getElementById('muteButton').innerHTML = `${muteIcon} ${this.player.muted ? 'Unmute' : 'Mute'}`;
+                document.getElementById('muteButtonMobile').textContent = muteIcon;
             }
 
-            toggleFullscreen() {
-                if (!document.fullscreenElement) {
-                    this.player.requestFullscreen().catch(err => {
-                        console.log('Fullscreen error:', err);
+            togglePlayStop() {
+                if (this.player.paused) {
+                    this.player.play().catch(error => {
+                        console.log('Play error:', error);
                     });
+                    document.getElementById('playStopButton').innerHTML = '⏸️ Stop';
+                    document.getElementById('playStopButtonMobile').textContent = '⏸️';
                 } else {
-                    document.exitFullscreen();
+                    this.player.pause();
+                    document.getElementById('playStopButton').innerHTML = '▶️ Play';
+                    document.getElementById('playStopButtonMobile').textContent = '▶️';
                 }
             }
 
@@ -423,5 +477,5 @@
             new TVPlayer();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0e7c9a692aae8',t:'MTc1NzM2MDI5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0f08f0481aae8',t:'MTc1NzM2MDY1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
