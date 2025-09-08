@@ -28,7 +28,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans overflow-hidden h-screen">
     <!-- Header -->
     <header class="bg-gray-800 p-4 flex items-center justify-between">
         <div class="flex items-center space-x-4">
@@ -42,7 +42,7 @@
         <div class="text-sm text-gray-300" id="currentChannel">Loading channels...</div>
     </header>
 
-    <div class="flex h-screen">
+    <div class="flex" style="height: calc(100vh - 4rem);">
         <!-- Sidebar -->
         <div id="sidebar" class="sidebar sidebar-toggle bg-gray-800 w-80 overflow-y-auto border-r border-gray-700 md:translate-x-0">
             <div class="p-4">
@@ -59,7 +59,7 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col">
             <!-- Video Player -->
-            <div class="flex-1 bg-black relative">
+            <div class="bg-black relative" style="height: calc(100vh - 8rem);">
                 <video 
                     id="videoPlayer" 
                     class="w-full h-full object-contain" 
@@ -423,5 +423,5 @@
             new TVPlayer();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0e37e3117aae8',t:'MTc1NzM2MDEyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0e7c9a692aae8',t:'MTc1NzM2MDI5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
