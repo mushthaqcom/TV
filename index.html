@@ -3,7 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online TV</title>
+    <title>Online TV - Watch Sri Lankan TV Channels Live | Free Streaming</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Watch Sri Lankan TV channels and popular international channels online for free. Stream live TV with our easy-to-use player. No registration required.">
+    <meta name="keywords" content="Sri Lankan TV, online TV, live streaming, free TV channels, watch TV online, Sri Lanka television, live TV streaming">
+    <meta name="author" content="Mushthaq.com">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Online TV - Watch Sri Lankan TV Channels Live">
+    <meta property="og:description" content="Stream Sri Lankan and popular international TV channels online for free. Easy-to-use live TV player with no registration required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mushthaq.com/tv">
+    <meta property="og:site_name" content="Online TV">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Online TV - Watch Sri Lankan TV Channels Live">
+    <meta name="twitter:description" content="Stream Sri Lankan and popular international TV channels online for free.">
+    <meta name="twitter:creator" content="@mushthaqcom">
+    
+    <!-- Additional SEO Tags -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Online TV">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mushthaq.com/tv">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📺%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
@@ -55,7 +88,7 @@
                 </div>
             </div>
             <div class="mt-auto p-4 pt-4 border-t border-gray-700 text-center flex-shrink-0">
-                <p class="text-xs text-gray-500">Made by <a href="https://mushthaq.com" target="_blank" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
+                <p class="text-xs text-gray-500">Powered by <a href="https://mushthaq.com" target="_blank" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
             </div>
         </div>
 
@@ -111,18 +144,15 @@
             </div>
 
             <!-- Mobile Player Controls -->
-            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-2 order-first">
-                <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
+            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-4 order-first">
+                <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
                     ⏮️ Previous
                 </button>
-                <button id="playStopButtonMobile" class="bg-green-600 hover:bg-green-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
+                <button id="playStopButtonMobile" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
                     ⏸️ Stop
                 </button>
-                <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
+                <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
                     Next ⏭️
-                </button>
-                <button id="fullscreenMobile" class="bg-purple-600 hover:bg-purple-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
-                    📱 Fullscreen
                 </button>
             </div>
         </div>
@@ -133,7 +163,7 @@
 
     <!-- Mobile watermark overlay -->
     <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
-        <p class="text-xs text-gray-400 bg-black bg-opacity-60 px-3 py-1 rounded-full">Made by <a href="https://mushthaq.com" target="_blank" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
+        <p class="text-xs text-gray-400 bg-black bg-opacity-60 px-3 py-1 rounded-full">Powered by <a href="https://mushthaq.com" target="_blank" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
     </div>
 
     <script>
@@ -196,10 +226,6 @@
                     this.nextChannel();
                 });
 
-                document.getElementById('fullscreenMobile').addEventListener('click', () => {
-                    this.toggleFullscreen();
-                });
-
                 document.getElementById('retryButton').addEventListener('click', () => {
                     this.playCurrentChannel();
                 });
@@ -241,9 +267,6 @@
                         case ' ':
                             e.preventDefault();
                             this.player.paused ? this.player.play() : this.player.pause();
-                            break;
-                        case 'f':
-                            this.toggleFullscreen();
                             break;
                         case 'm':
                             this.toggleMute();
@@ -470,32 +493,6 @@
                 this.loadingOverlay.classList.add('hidden');
                 this.errorOverlay.classList.add('hidden');
             }
-
-            toggleFullscreen() {
-                if (!document.fullscreenElement) {
-                    // Enter fullscreen
-                    if (this.player.requestFullscreen) {
-                        this.player.requestFullscreen();
-                    } else if (this.player.webkitRequestFullscreen) {
-                        this.player.webkitRequestFullscreen();
-                    } else if (this.player.mozRequestFullScreen) {
-                        this.player.mozRequestFullScreen();
-                    } else if (this.player.msRequestFullscreen) {
-                        this.player.msRequestFullscreen();
-                    }
-                } else {
-                    // Exit fullscreen
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    }
-                }
-            }
         }
 
         // Initialize the TV player when the page loads
@@ -503,5 +500,5 @@
             new TVPlayer();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c116b810deac03',t:'MTc1NzM2MjIyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c12302d154ac03',t:'MTc1NzM2MjcyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
