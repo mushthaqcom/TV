@@ -111,15 +111,18 @@
             </div>
 
             <!-- Mobile Player Controls -->
-            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-4 order-first">
-                <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
+            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-2 order-first">
+                <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
                     ⏮️ Previous
                 </button>
-                <button id="playStopButtonMobile" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
+                <button id="playStopButtonMobile" class="bg-green-600 hover:bg-green-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
                     ⏸️ Stop
                 </button>
-                <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
+                <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
                     Next ⏭️
+                </button>
+                <button id="fullscreenMobile" class="bg-purple-600 hover:bg-purple-700 px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
+                    📱 Fullscreen
                 </button>
             </div>
         </div>
@@ -127,6 +130,11 @@
 
     <!-- Mobile overlay -->
     <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+    <!-- Mobile watermark overlay -->
+    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
+        <p class="text-xs text-gray-400 bg-black bg-opacity-60 px-3 py-1 rounded-full">Made by <a href="https://mushthaq.com" target="_blank" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
+    </div>
 
     <script>
         class TVPlayer {
@@ -186,6 +194,10 @@
 
                 document.getElementById('nextChannelMobile').addEventListener('click', () => {
                     this.nextChannel();
+                });
+
+                document.getElementById('fullscreenMobile').addEventListener('click', () => {
+                    this.toggleFullscreen();
                 });
 
                 document.getElementById('retryButton').addEventListener('click', () => {
@@ -458,6 +470,32 @@
                 this.loadingOverlay.classList.add('hidden');
                 this.errorOverlay.classList.add('hidden');
             }
+
+            toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    // Enter fullscreen
+                    if (this.player.requestFullscreen) {
+                        this.player.requestFullscreen();
+                    } else if (this.player.webkitRequestFullscreen) {
+                        this.player.webkitRequestFullscreen();
+                    } else if (this.player.mozRequestFullScreen) {
+                        this.player.mozRequestFullScreen();
+                    } else if (this.player.msRequestFullscreen) {
+                        this.player.msRequestFullscreen();
+                    }
+                } else {
+                    // Exit fullscreen
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
+            }
         }
 
         // Initialize the TV player when the page loads
@@ -465,5 +503,5 @@
             new TVPlayer();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c10ec55211ac03',t:'MTc1NzM2MTg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c116b810deac03',t:'MTc1NzM2MjIyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
