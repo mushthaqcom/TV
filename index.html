@@ -63,7 +63,6 @@
                 <video 
                     id="videoPlayer" 
                     class="w-full h-full object-contain" 
-                    controls 
                     autoplay 
                     muted
                     poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23111827'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='24'%3ESelect a channel to start%3C/text%3E%3C/svg%3E">
@@ -107,28 +106,19 @@
             </div>
 
             <!-- Mobile Player Controls -->
-            <div class="bg-gray-800 p-8 flex md:hidden items-center justify-center">
-                <div class="relative w-48 h-48">
-                    <!-- Top - Volume -->
-                    <button id="muteButtonMobile" class="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-2xl transition-colors">
-                        🔊
-                    </button>
-                    
-                    <!-- Left - Previous -->
-                    <button id="prevChannelMobile" class="absolute left-0 top-1/2 transform -translate-y-1/2 w-16 h-16 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-2xl transition-colors">
-                        ⏮️
-                    </button>
-                    
-                    <!-- Center - Play/Stop -->
-                    <button id="playStopButtonMobile" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center text-3xl transition-colors">
-                        ⏸️
-                    </button>
-                    
-                    <!-- Right - Next -->
-                    <button id="nextChannelMobile" class="absolute right-0 top-1/2 transform -translate-y-1/2 w-16 h-16 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-2xl transition-colors">
-                        ⏭️
-                    </button>
-                </div>
+            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-4">
+                <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
+                    ⏮️ Previous
+                </button>
+                <button id="playStopButtonMobile" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
+                    ⏸️ Stop
+                </button>
+                <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
+                    Next ⏭️
+                </button>
+                <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
+                    🔊 Mute
+                </button>
             </div>
         </div>
     </div>
@@ -219,12 +209,12 @@
 
                 this.player.addEventListener('play', () => {
                     document.getElementById('playStopButton').innerHTML = '⏸️ Stop';
-                    document.getElementById('playStopButtonMobile').textContent = '⏸️';
+                    document.getElementById('playStopButtonMobile').innerHTML = '⏸️ Stop';
                 });
 
                 this.player.addEventListener('pause', () => {
                     document.getElementById('playStopButton').innerHTML = '▶️ Play';
-                    document.getElementById('playStopButtonMobile').textContent = '▶️';
+                    document.getElementById('playStopButtonMobile').innerHTML = '▶️ Play';
                 });
 
                 // Keyboard shortcuts
@@ -428,8 +418,9 @@
             toggleMute() {
                 this.player.muted = !this.player.muted;
                 const muteIcon = this.player.muted ? '🔇' : '🔊';
-                document.getElementById('muteButton').innerHTML = `${muteIcon} ${this.player.muted ? 'Unmute' : 'Mute'}`;
-                document.getElementById('muteButtonMobile').textContent = muteIcon;
+                const muteText = this.player.muted ? 'Unmute' : 'Mute';
+                document.getElementById('muteButton').innerHTML = `${muteIcon} ${muteText}`;
+                document.getElementById('muteButtonMobile').innerHTML = `${muteIcon} ${muteText}`;
             }
 
             togglePlayStop() {
@@ -438,11 +429,11 @@
                         console.log('Play error:', error);
                     });
                     document.getElementById('playStopButton').innerHTML = '⏸️ Stop';
-                    document.getElementById('playStopButtonMobile').textContent = '⏸️';
+                    document.getElementById('playStopButtonMobile').innerHTML = '⏸️ Stop';
                 } else {
                     this.player.pause();
                     document.getElementById('playStopButton').innerHTML = '▶️ Play';
-                    document.getElementById('playStopButtonMobile').textContent = '▶️';
+                    document.getElementById('playStopButtonMobile').innerHTML = '▶️ Play';
                 }
             }
 
@@ -477,5 +468,5 @@
             new TVPlayer();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0f08f0481aae8',t:'MTc1NzM2MDY1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0fd38a51eac03',t:'MTc1NzM2MTE3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
