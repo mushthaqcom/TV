@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online TV</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         .channel-item:hover {
             background-color: #1f2937;
@@ -126,6 +127,7 @@
                 this.errorOverlay = document.getElementById('errorOverlay');
                 this.sidebar = document.getElementById('sidebar');
                 this.mobileOverlay = document.getElementById('mobileOverlay');
+                this.hls = null;
                 
                 this.initializeEventListeners();
                 this.loadPlaylist();
@@ -309,14 +311,58 @@
                 if (this.channels.length === 0) return;
                 
                 const channel = this.channels[this.currentChannelIndex];
-                this.player.src = channel.url;
-                this.player.load();
                 this.updateActiveChannel();
                 
-                // Auto-play with error handling
-                this.player.play().catch(error => {
-                    console.log('Auto-play prevented:', error);
-                });
+                // Clean up previous HLS instance
+                if (this.hls) {
+                    this.hls.destroy();
+                    this.hls = null;
+                }
+                
+                // Check if the URL is an HLS stream (.m3u8)
+                if (channel.url.includes('.m3u8') || channel.url.includes('m3u8')) {
+                    if (Hls.isSupported()) {
+                        // Use HLS.js for HLS streams
+                        this.hls = new Hls({
+                            enableWorker: true,
+                            lowLatencyMode: true,
+                            backBufferLength: 90
+                        });
+                        
+                        this.hls.loadSource(channel.url);
+                        this.hls.attachMedia(this.player);
+                        
+                        this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                            this.player.play().catch(error => {
+                                console.log('Auto-play prevented:', error);
+                            });
+                        });
+                        
+                        this.hls.on(Hls.Events.ERROR, (event, data) => {
+                            console.error('HLS Error:', data);
+                            if (data.fatal) {
+                                this.showError();
+                            }
+                        });
+                    } else if (this.player.canPlayType('application/vnd.apple.mpegurl')) {
+                        // Native HLS support (Safari)
+                        this.player.src = channel.url;
+                        this.player.load();
+                        this.player.play().catch(error => {
+                            console.log('Auto-play prevented:', error);
+                        });
+                    } else {
+                        console.error('HLS not supported');
+                        this.showError();
+                    }
+                } else {
+                    // Regular video file
+                    this.player.src = channel.url;
+                    this.player.load();
+                    this.player.play().catch(error => {
+                        console.log('Auto-play prevented:', error);
+                    });
+                }
             }
 
             previousChannel() {
@@ -377,5 +423,5 @@
             new TVPlayer();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0ddb9e090aae8',t:'MTc1NzM1OTg4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0e37e3117aae8',t:'MTc1NzM2MDEyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
