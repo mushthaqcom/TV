@@ -44,7 +44,7 @@
 
     <div class="flex" style="height: calc(100vh - 4rem);">
         <!-- Sidebar -->
-        <div id="sidebar" class="sidebar sidebar-toggle bg-gray-800 w-80 overflow-y-auto border-r border-gray-700 md:translate-x-0">
+        <div id="sidebar" class="sidebar sidebar-toggle sidebar-hidden bg-gray-800 w-80 overflow-y-auto border-r border-gray-700 md:translate-x-0">
             <div class="p-4">
                 <h2 class="text-lg font-semibold mb-4 text-blue-400">📋 Channels</h2>
                 <div id="channelList" class="space-y-2">
@@ -106,7 +106,7 @@
             </div>
 
             <!-- Mobile Player Controls -->
-            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-4">
+            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-4 order-first">
                 <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
                     ⏮️ Previous
                 </button>
@@ -115,9 +115,6 @@
                 </button>
                 <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
                     Next ⏭️
-                </button>
-                <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
-                    🔊 Mute
                 </button>
             </div>
         </div>
@@ -174,10 +171,6 @@
                 });
 
                 // Mobile Player controls
-                document.getElementById('muteButtonMobile').addEventListener('click', () => {
-                    this.toggleMute();
-                });
-
                 document.getElementById('playStopButtonMobile').addEventListener('click', () => {
                     this.togglePlayStop();
                 });
@@ -420,7 +413,6 @@
                 const muteIcon = this.player.muted ? '🔇' : '🔊';
                 const muteText = this.player.muted ? 'Unmute' : 'Mute';
                 document.getElementById('muteButton').innerHTML = `${muteIcon} ${muteText}`;
-                document.getElementById('muteButtonMobile').innerHTML = `${muteIcon} ${muteText}`;
             }
 
             togglePlayStop() {
@@ -468,5 +460,5 @@
             new TVPlayer();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0fd38a51eac03',t:'MTc1NzM2MTE3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1032e9141ac03',t:'MTc1NzM2MTQyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
