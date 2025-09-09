@@ -89,7 +89,7 @@
             <div class="flex items-center space-x-3">
                 <img src="./logo.png" alt="Online TV Logo" class="w-8 h-8" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
                 <span class="text-2xl" style="display: none;">📺</span>
-                <h1 class="text-2xl font-bold text-blue-400">Online TV <span class="text-sm text-gray-400 font-normal">v1.0</span></h1>
+                <h1 class="text-2xl font-bold text-blue-400">Online TV <span class="text-sm text-gray-400 font-normal">v1.01</span></h1>
             </div>
         </div>
         <div class="text-sm text-gray-300" id="currentChannel">Loading channels...</div>
@@ -417,6 +417,7 @@
                             <div class="flex-1 min-w-0">
                                 <div class="text-sm font-medium truncate">${channel.name}</div>
                             </div>
+                            ${(channel.name === 'ITN' || channel.name === 'Vasantham') ? '<span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold">New</span>' : ''}
                         </div>
                     </div>
                 `).join('');
@@ -614,5 +615,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c9825b94fdebb6',t:'MTc1NzQ1MDUxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c98552e63bebb6',t:'MTc1NzQ1MDYzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
