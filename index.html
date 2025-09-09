@@ -335,7 +335,9 @@
                     type: 'iframe'
                 });
                 
-                for (let i = 0; i < lines.length; i++) {
+                // Parse first two channels from M3U before adding Vasantham
+                let channelCount = 0;
+                for (let i = 0; i < lines.length && channelCount < 2; i++) {
                     const line = lines[i].trim();
                     if (line.startsWith('#EXTINF:')) {
                         const nameMatch = line.match(/,(.+)$/);
@@ -353,6 +355,42 @@
                         
                         if (url) {
                             this.channels.push({ name, url, type: 'video' });
+                            channelCount++;
+                        }
+                    }
+                }
+                
+                // Add Vasantham as the 3rd channel
+                this.channels.push({ 
+                    name: 'Vasantham', 
+                    url: 'https://www.vasantham.lk/',
+                    type: 'iframe'
+                });
+                
+                // Continue parsing remaining channels from M3U (skip first 2 already added)
+                let processedChannels = 0;
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line.startsWith('#EXTINF:')) {
+                        const nameMatch = line.match(/,(.+)$/);
+                        const name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
+                        
+                        // Get the next non-empty line as URL
+                        let url = '';
+                        for (let j = i + 1; j < lines.length; j++) {
+                            const nextLine = lines[j].trim();
+                            if (nextLine && !nextLine.startsWith('#')) {
+                                url = nextLine;
+                                break;
+                            }
+                        }
+                        
+                        if (url) {
+                            processedChannels++;
+                            // Skip first 2 channels as they're already added above
+                            if (processedChannels > 2) {
+                                this.channels.push({ name, url, type: 'video' });
+                            }
                         }
                     }
                 }
@@ -576,5 +614,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c94d9300d336bd',t:'MTc1NzQ0ODM1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c95462d5fcebb6',t:'MTc1NzQ0ODYzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
