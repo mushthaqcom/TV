@@ -328,6 +328,13 @@
                 const lines = content.split('\n');
                 this.channels = [];
                 
+                // Add ITN as the first channel
+                this.channels.push({ 
+                    name: 'ITN', 
+                    url: 'https://itn.lk/live/',
+                    type: 'iframe'
+                });
+                
                 for (let i = 0; i < lines.length; i++) {
                     const line = lines[i].trim();
                     if (line.startsWith('#EXTINF:')) {
@@ -345,7 +352,7 @@
                         }
                         
                         if (url) {
-                            this.channels.push({ name, url });
+                            this.channels.push({ name, url, type: 'video' });
                         }
                     }
                 }
@@ -416,49 +423,81 @@
                     this.hls = null;
                 }
                 
-                // Check if the URL is an HLS stream (.m3u8)
-                if (channel.url.includes('.m3u8') || channel.url.includes('m3u8')) {
-                    if (Hls.isSupported()) {
-                        // Use HLS.js for HLS streams
-                        this.hls = new Hls({
-                            enableWorker: true,
-                            lowLatencyMode: true,
-                            backBufferLength: 90
-                        });
-                        
-                        this.hls.loadSource(channel.url);
-                        this.hls.attachMedia(this.player);
-                        
-                        this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                const videoContainer = this.player.parentElement;
+                
+                // Check if this is an iframe channel (like ITN)
+                if (channel.type === 'iframe') {
+                    // Hide video player and show iframe
+                    this.player.style.display = 'none';
+                    
+                    // Remove any existing iframe
+                    const existingIframe = videoContainer.querySelector('iframe');
+                    if (existingIframe) {
+                        existingIframe.remove();
+                    }
+                    
+                    // Create new iframe
+                    const iframe = document.createElement('iframe');
+                    iframe.src = channel.url;
+                    iframe.className = 'w-full h-full';
+                    iframe.style.border = 'none';
+                    iframe.allow = 'autoplay; fullscreen';
+                    iframe.allowFullscreen = true;
+                    
+                    videoContainer.appendChild(iframe);
+                    this.hideOverlays();
+                } else {
+                    // Show video player and remove any iframe
+                    this.player.style.display = 'block';
+                    const existingIframe = videoContainer.querySelector('iframe');
+                    if (existingIframe) {
+                        existingIframe.remove();
+                    }
+                    
+                    // Check if the URL is an HLS stream (.m3u8)
+                    if (channel.url.includes('.m3u8') || channel.url.includes('m3u8')) {
+                        if (Hls.isSupported()) {
+                            // Use HLS.js for HLS streams
+                            this.hls = new Hls({
+                                enableWorker: true,
+                                lowLatencyMode: true,
+                                backBufferLength: 90
+                            });
+                            
+                            this.hls.loadSource(channel.url);
+                            this.hls.attachMedia(this.player);
+                            
+                            this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                                this.player.play().catch(error => {
+                                    console.log('Auto-play prevented:', error);
+                                });
+                            });
+                            
+                            this.hls.on(Hls.Events.ERROR, (event, data) => {
+                                console.error('HLS Error:', data);
+                                if (data.fatal) {
+                                    this.showError();
+                                }
+                            });
+                        } else if (this.player.canPlayType('application/vnd.apple.mpegurl')) {
+                            // Native HLS support (Safari)
+                            this.player.src = channel.url;
+                            this.player.load();
                             this.player.play().catch(error => {
                                 console.log('Auto-play prevented:', error);
                             });
-                        });
-                        
-                        this.hls.on(Hls.Events.ERROR, (event, data) => {
-                            console.error('HLS Error:', data);
-                            if (data.fatal) {
-                                this.showError();
-                            }
-                        });
-                    } else if (this.player.canPlayType('application/vnd.apple.mpegurl')) {
-                        // Native HLS support (Safari)
+                        } else {
+                            console.error('HLS not supported');
+                            this.showError();
+                        }
+                    } else {
+                        // Regular video file
                         this.player.src = channel.url;
                         this.player.load();
                         this.player.play().catch(error => {
                             console.log('Auto-play prevented:', error);
                         });
-                    } else {
-                        console.error('HLS not supported');
-                        this.showError();
                     }
-                } else {
-                    // Regular video file
-                    this.player.src = channel.url;
-                    this.player.load();
-                    this.player.play().catch(error => {
-                        console.log('Auto-play prevented:', error);
-                    });
                 }
             }
 
@@ -537,5 +576,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c196bb7287a1ec',t:'MTc1NzM2NzQ2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c94d9300d336bd',t:'MTc1NzQ0ODM1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
