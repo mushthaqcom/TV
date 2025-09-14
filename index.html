@@ -328,16 +328,9 @@
                 const lines = content.split('\n');
                 this.channels = [];
                 
-                // Add ITN as the first channel
-                this.channels.push({ 
-                    name: 'ITN', 
-                    url: 'https://itn.lk/live/',
-                    type: 'iframe'
-                });
-                
-                // Parse first two channels from M3U before adding Vasantham
-                let channelCount = 0;
-                for (let i = 0; i < lines.length && channelCount < 2; i++) {
+                // Parse first channel from M3U (Siyatha TV) and make it first
+                let siyathaChannel = null;
+                for (let i = 0; i < lines.length; i++) {
                     const line = lines[i].trim();
                     if (line.startsWith('#EXTINF:')) {
                         const nameMatch = line.match(/,(.+)$/);
@@ -354,15 +347,32 @@
                         }
                         
                         if (url) {
-                            this.channels.push({ name, url, type: 'video' });
-                            channelCount++;
+                            siyathaChannel = { name, url, type: 'video' };
+                            break;
                         }
                     }
                 }
                 
-
+                // Add channels in the new order
+                if (siyathaChannel) {
+                    this.channels.push(siyathaChannel); // 1st: Siyatha TV
+                }
                 
-                // Continue parsing remaining channels from M3U (skip first 2 already added)
+                // Add ITN as the second channel
+                this.channels.push({ 
+                    name: 'ITN', 
+                    url: 'https://itn.lk/live/',
+                    type: 'iframe'
+                });
+                
+                // Add TV Derana as the third channel
+                this.channels.push({ 
+                    name: 'TV Derana', 
+                    url: 'https://www.youtube.com/@TVDeranaLIVE/streams',
+                    type: 'youtube'
+                });
+                
+                // Continue parsing remaining channels from M3U (skip first channel already added)
                 let processedChannels = 0;
                 for (let i = 0; i < lines.length; i++) {
                     const line = lines[i].trim();
@@ -382,8 +392,8 @@
                         
                         if (url) {
                             processedChannels++;
-                            // Skip first 2 channels as they're already added above
-                            if (processedChannels > 2) {
+                            // Skip first channel as it's already added above
+                            if (processedChannels > 1) {
                                 this.channels.push({ name, url, type: 'video' });
                             }
                         }
@@ -477,6 +487,27 @@
                     iframe.style.border = 'none';
                     iframe.allow = 'autoplay; fullscreen';
                     iframe.allowFullscreen = true;
+                    
+                    videoContainer.appendChild(iframe);
+                    this.hideOverlays();
+                } else if (channel.type === 'youtube') {
+                    // Hide video player and show YouTube iframe
+                    this.player.style.display = 'none';
+                    
+                    // Remove any existing iframe
+                    const existingIframe = videoContainer.querySelector('iframe');
+                    if (existingIframe) {
+                        existingIframe.remove();
+                    }
+                    
+                    // Create new iframe for YouTube
+                    const iframe = document.createElement('iframe');
+                    iframe.src = channel.url;
+                    iframe.className = 'w-full h-full';
+                    iframe.style.border = 'none';
+                    iframe.allow = 'autoplay; fullscreen; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+                    iframe.sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms';
                     
                     videoContainer.appendChild(iframe);
                     this.hideOverlays();
@@ -610,5 +641,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c9949a054d36bd',t:'MTc1NzQ1MTI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ebd76f22dca24c',t:'MTc1NzgxMDUxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
