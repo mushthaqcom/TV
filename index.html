@@ -92,7 +92,9 @@
                 <h1 class="text-2xl font-bold text-blue-400">Online TV <span class="text-sm text-gray-400 font-normal">v1.01</span></h1>
             </div>
         </div>
-        <div class="text-sm text-gray-300" id="currentChannel">Loading channels...</div>
+        <div class="flex items-center space-x-2 text-sm text-gray-300" id="currentChannel">
+            <span>Loading channels...</span>
+        </div>
     </header>
 
     <div class="flex" style="height: calc(100vh - 4rem);">
@@ -328,13 +330,16 @@
                 const lines = content.split('\n');
                 this.channels = [];
                 
-                // Parse first channel from M3U (Siyatha TV) and make it first
-                let siyathaChannel = null;
+                // Parse all channels from M3U
                 for (let i = 0; i < lines.length; i++) {
                     const line = lines[i].trim();
                     if (line.startsWith('#EXTINF:')) {
                         const nameMatch = line.match(/,(.+)$/);
                         const name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
+                        
+                        // Extract logo URL from tvg-logo attribute
+                        const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+                        const logo = logoMatch ? logoMatch[1] : null;
                         
                         // Get the next non-empty line as URL
                         let url = '';
@@ -347,45 +352,7 @@
                         }
                         
                         if (url) {
-                            siyathaChannel = { name, url, type: 'video' };
-                            break;
-                        }
-                    }
-                }
-                
-                // Add channels in the new order
-                if (siyathaChannel) {
-                    this.channels.push(siyathaChannel); // 1st: Siyatha TV
-                }
-                
-
-                
-
-                
-                // Continue parsing remaining channels from M3U (skip first channel already added)
-                let processedChannels = 0;
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    if (line.startsWith('#EXTINF:')) {
-                        const nameMatch = line.match(/,(.+)$/);
-                        const name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
-                        
-                        // Get the next non-empty line as URL
-                        let url = '';
-                        for (let j = i + 1; j < lines.length; j++) {
-                            const nextLine = lines[j].trim();
-                            if (nextLine && !nextLine.startsWith('#')) {
-                                url = nextLine;
-                                break;
-                            }
-                        }
-                        
-                        if (url) {
-                            processedChannels++;
-                            // Skip first channel as it's already added above
-                            if (processedChannels > 1) {
-                                this.channels.push({ name, url, type: 'video' });
-                            }
+                            this.channels.push({ name, url, logo, type: 'video' });
                         }
                     }
                 }
@@ -406,9 +373,11 @@
                     <div class="channel-item p-3 rounded-lg cursor-pointer transition-colors ${index === this.currentChannelIndex ? 'active' : ''}" 
                          data-index="${index}">
                         <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
-                                ${index + 1}
-                            </div>
+                            ${channel.logo ? 
+                                `<img src="${channel.logo}" alt="${channel.name}" class="w-8 h-8 object-contain flex-shrink-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style="display: none;">${index + 1}</div>` : 
+                                `<div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">${index + 1}</div>`
+                            }
                             <div class="flex-1 min-w-0">
                                 <div class="text-sm font-medium truncate">${channel.name}</div>
                             </div>
@@ -441,7 +410,14 @@
                 });
                 
                 if (this.channels[this.currentChannelIndex]) {
-                    this.currentChannelDisplay.textContent = this.channels[this.currentChannelIndex].name;
+                    const channel = this.channels[this.currentChannelIndex];
+                    this.currentChannelDisplay.innerHTML = `
+                        ${channel.logo ? 
+                            `<img src="${channel.logo}" alt="${channel.name}" class="w-6 h-6 rounded object-cover" onerror="this.style.display='none';">` : 
+                            ''
+                        }
+                        <span>${channel.name}</span>
+                    `;
                 }
             }
 
@@ -631,5 +607,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981202d204f7ebbd',t:'MTc1ODIxMDc1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981347e2a7aeac45',t:'MTc1ODIyNDA2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
