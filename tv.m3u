@@ -17,3 +17,21 @@ https://cdn.jwplayer.com/videos/1m0nMXhZ-3SDdwqdV.m3u8
 https://fl3.moveonjoy.com/WILLOW_CRICKET/index.m3u8
 #EXTINF:-1 tvg-id="" tvg-logo="https://i.imgur.com/v7nSm7M.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="channeleye" tvg-logo="https://channeleye.lk/wp-content/uploads/2022/05/1-1-e1701650048686.png" group-title="Local",Channel Eye
+https://edge4-moblive.yuppcdn.net/trans1sd/smil:nettv15.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="charana" tvg-logo="https://i0.wp.com/www.charanatv.lk/wp-content/uploads/2021/08/CHARANA-LOGO.png" group-title="Local",Charana TV
+https://edge4-moblive.yuppcdn.net/trans1sd/smil:nettv15.smil/chunklist_w1413418087_b596000.m3u8?nimblesessionid=58274315
+#EXTINF:-1 tvg-id="itn" tvg-logo="https://itn.lk/wp-content/uploads/2022/03/ITN-Logo.svg" group-title="Local",ITN
+https://edge4-moblive.yuppcdn.net/transsd/smil:itn43.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="jaya" tvg-logo="https://i.imgur.com/J8NA1i9.jpeg" group-title="Local",Jaya TV
+https://edge3-moblive.yuppcdn.net/drm/smil:jayamagatvdrm.smil/index.m3u8
+#EXTINF:-1 tvg-id="shakthi" tvg-logo="https://shakthitv.lk/wp-content/uploads/2021/12/shakthi-tv-logo-90.png" group-title="Local",Shakthi TV
+https://edge4-moblive.yuppcdn.net/transsd/smil:saktv10.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="sirasa" tvg-logo="https://sirasatv.lk/assets/images/Sirasa_TV_Logo.png" group-title="Local",Sirasa TV
+https://edge2-moblive.yuppcdn.net/transsd/smil:sirtv09.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="startamil" tvg-logo="https://i.imgur.com/lPLMVrc.png" group-title="Local",Star Tamil
+https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="tv1" tvg-logo="https://tv1.lk/images/TV1%20logo.png" group-title="Local",TV 1
+https://edge4-moblive.yuppcdn.net/trans1sd/smil:tv111.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="derana" tvg-logo="https://www.derana.lk/images/logo/logo-color-bg-transparent.webp" group-title="Local",TV Derana
+https://edge3-moblive.yuppcdn.net/transhd2/smil:detv04.smil/index.m3u8
