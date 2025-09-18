@@ -13,7 +13,7 @@ https://jk3lz8xklw79-hls-live.5centscdn.com/live/6226f7cbe59e99a90b5cef6f94f966f
 https://edge2-moblive.yuppcdn.net/transsd/smil:sirtv09.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="hiru" tvg-logo="https://i.imgur.com/d2mDGx4.png" group-title="Local" tvg-name="Hiru TV",Hiru TV
 https://tv.hiruhost.com:1936/8012/8012/playlist.m3u8
-#EXTINF:-1 tvg-id="derana" tvg-logo="https://i.imgur.com/uN0JbcA.png" group-title="Local",TV Derana
+#EXTINF:-1 tvg-id="derana" tvg-logo="https://i.imgur.com/EhfNX7B.png" group-title="Local",TV Derana
 https://edge3-moblive.yuppcdn.net/transhd2/smil:detv04.smil/index.m3u8
 #EXTINF:-1 tvg-id="vasantham" tvg-logo="https://i.imgur.com/20jguim.png" group-title="Local",Vasantham TV
 https://edge3-moblive.yuppcdn.net/trans1sd/smil:vatv07.smil/playlist.m3u8
@@ -35,4 +35,5 @@ https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8
 https://fl3.moveonjoy.com/WILLOW_CRICKET/index.m3u8
 #EXTINF:-1 tvg-id="" tvg-logo="https://i.imgur.com/v7nSm7M.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+
 
