@@ -35,3 +35,5 @@ https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:tv111.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="derana" tvg-logo="https://www.derana.lk/images/logo/logo-color-bg-transparent.webp" group-title="Local",TV Derana
 https://edge3-moblive.yuppcdn.net/transhd2/smil:detv04.smil/index.m3u8
+#EXTINF:-1 tvg-id="vasantham" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/5/58/Vasantham.jpg" group-title="Local",Vasantham TV
+https://edge3-moblive.yuppcdn.net/trans1sd/smil:vatv07.smil/playlist.m3u8
