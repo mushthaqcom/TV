@@ -1,611 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online TV - Watch Sri Lankan TV Channels Live | Free Streaming</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Watch Sri Lankan TV channels and popular international channels online for free. Stream live TV with our easy-to-use player. No registration required.">
-    <meta name="keywords" content="Sri Lankan TV, online TV, live streaming, free TV channels, watch TV online, Sri Lanka television, live TV streaming">
-    <meta name="author" content="Mushthaq.com">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    
-    <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="Online TV - Watch Sri Lankan TV Channels Live">
-    <meta property="og:description" content="Stream Sri Lankan and popular international TV channels online for free. Easy-to-use live TV player with no registration required.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mushthaq.com/tv">
-    <meta property="og:site_name" content="Online TV">
-    <meta property="og:locale" content="en_US">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Online TV - Watch Sri Lankan TV Channels Live">
-    <meta name="twitter:description" content="Stream Sri Lankan and popular international TV channels online for free.">
-    <meta name="twitter:creator" content="@mushthaqcom">
-    
-    <!-- Additional SEO Tags -->
-    <meta name="theme-color" content="#3b82f6">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Online TV">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://mushthaq.com/tv">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./logo.png">
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk9ubGluZSBUViAtIFNyaSBMYW5rYW4gVFYgQ2hhbm5lbHMiLAogICJzaG9ydF9uYW1lIjogIk9ubGluZSBUViIsCiAgImRlc2NyaXB0aW9uIjogIldhdGNoIFNyaSBMYW5rYW4gVFYgY2hhbm5lbHMgYW5kIHBvcHVsYXIgaW50ZXJuYXRpb25hbCBjaGFubmVscyBvbmxpbmUgZm9yIGZyZWUiLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzExMTgyNyIsCiAgInRoZW1lX2NvbG9yIjogIiMzYjgyZjYiLAogICJvcmllbnRhdGlvbiI6ICJhbnkiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICIuL2xvZ28ucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogIi4vbG9nby5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSIKICAgIH0KICBdLAogICJjYXRlZ29yaWVzIjogWyJlbnRlcnRhaW5tZW50IiwgIm11bHRpbWVkaWEiLCAidHYiXSwKICAibGFuZyI6ICJlbiIsCiAgImRpciI6ICJsdHIiCn0=">
-    
-    <!-- iOS PWA Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Online TV">
-    <link rel="apple-touch-icon" href="./logo.png">
-    <link rel="apple-touch-startup-image" href="./logo.png">
-    
-    <!-- Windows PWA Meta Tags -->
-    <meta name="msapplication-TileColor" content="#3b82f6">
-    <meta name="msapplication-TileImage" content="./logo.png">
-    <meta name="msapplication-config" content="none">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <style>
-        .channel-item:hover {
-            background-color: #1f2937;
-        }
-        .channel-item.active {
-            background-color: #3b82f6;
-        }
-        .sidebar-toggle {
-            transition: transform 0.3s ease;
-        }
-        .sidebar-hidden {
-            transform: translateX(-100%);
-        }
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                z-index: 50;
-                height: 100vh;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online TV - Watch Sri Lankan TV Channels Live | Free Streaming</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Watch Sri Lankan TV channels and popular international channels online for free. Stream live TV with our easy-to-use player. No registration required.">
+  <meta name="keywords" content="Sri Lankan TV, online TV, live streaming, free TV channels, watch TV online, Sri Lanka television, live TV streaming">
+  <meta name="author" content="Mushthaq.com">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Online TV - Watch Sri Lankan TV Channels Live">
+  <meta property="og:description" content="Stream Sri Lankan and popular international TV channels online for free. Easy-to-use live TV player with no registration required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mushthaq.com/tv">
+  <meta property="og:site_name" content="Online TV">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Online TV - Watch Sri Lankan TV Channels Live">
+  <meta name="twitter:description" content="Stream Sri Lankan and popular international TV channels online for free.">
+  <meta name="twitter:creator" content="@mushthaqcom">
+
+  <!-- PWA/Theme -->
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Online TV">
+  <link rel="canonical" href="https://mushthaq.com/tv">
+  <link rel="icon" type="image/png" href="./logo.png">
+
+  <!-- Inline manifest (demo) -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk9ubGluZSBUViAtIFNyaSBMYW5rYW4gVFYgQ2hhbm5lbHMiLAogICJzaG9ydF9uYW1lIjogIk9ubGluZSBUViIsCiAgImRlc2NyaXB0aW9uIjogIldhdGNoIFNyaSBMYW5rYW4gVFYgY2hhbm5lbHMgYW5kIHBvcHVsYXIgaW50ZXJuYXRpb25hbCBjaGFubmVscyBvbmxpbmUgZm9yIGZyZWUiLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzExMTgyNyIsCiAgInRoZW1lX2NvbG9yIjogIiMzYjgyZjYiLAogICJvcmllbnRhdGlvbiI6ICJhbnkiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICIuL2xvZ28ucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogIi4vbG9nby5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSIKICAgIH0KICBdLAogICJjYXRlZ29yaWVzIjogWyJlbnRlcnRhaW5tZW50IiwgIm11bHRpbWVkaWEiLCAidHYiXSwKICAibGFuZyI6ICJlbiIsCiAgImRpciI6ICJsdHIiCn0=">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <style>
+    .channel-item:hover { background-color: #1f2937; }
+    .channel-item.active { background-color: #3b82f6; }
+    .sidebar-toggle { transition: transform 0.3s ease; }
+    .sidebar-hidden { transform: translateX(-100%); }
+    @media (max-width: 768px) {
+      .sidebar { position: fixed; z-index: 50; height: 100vh; }
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white font-sans overflow-hidden h-screen">
-    <!-- Header -->
-    <header class="bg-gray-800 p-4 flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-            <button id="sidebarToggle" class="md:hidden text-white hover:text-blue-400">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
+  <!-- Header -->
+  <header class="bg-gray-800 p-4 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <button id="sidebarToggle" class="md:hidden text-white hover:text-blue-400" aria-label="Toggle channels">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <div class="flex items-center space-x-3">
+        <img src="./logo.png" alt="Online TV Logo" class="w-8 h-8" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+        <span class="text-2xl" style="display:none;">📺</span>
+        <h1 class="text-2xl font-bold text-blue-400">Online TV <span class="text-sm text-gray-400 font-normal">v1.09</span></h1>
+      </div>
+    </div>
+    <div class="flex items-center space-x-2 text-sm text-gray-300" id="currentChannel">
+      <span>Loading channels...</span>
+    </div>
+  </header>
+
+  <div class="flex" style="height: calc(100vh - 4rem);">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar sidebar-toggle sidebar-hidden bg-gray-800 w-80 border-r border-gray-700 md:translate-x-0 flex flex-col">
+      <div class="p-4 flex-shrink-0">
+        <h2 class="text-lg font-semibold mb-4 text-blue-400">📋 Channels</h2>
+      </div>
+
+      <div id="channelList" class="space-y-2 flex-1 overflow-y-auto px-4 pb-4">
+        <div class="text-center py-8 text-gray-400">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400 mx-auto mb-2"></div>
+          Loading channels...
+        </div>
+      </div>
+
+      <!-- Desktop Controls -->
+      <div class="bg-gray-700 p-4 flex-shrink-0 hidden md:block">
+        <div class="space-y-3">
+          <div class="flex space-x-2">
+            <button id="prevChannel" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1 flex items-center justify-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
+              </svg>
+              <span>Previous</span>
             </button>
-            <div class="flex items-center space-x-3">
-                <img src="./logo.png" alt="Online TV Logo" class="w-8 h-8" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-                <span class="text-2xl" style="display: none;">📺</span>
-                <h1 class="text-2xl font-bold text-blue-400">Online TV <span class="text-sm text-gray-400 font-normal">v1.01</span></h1>
-            </div>
+            <button id="nextChannel" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1 flex items-center justify-center space-x-2">
+              <span>Next</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+          <div class="flex">
+            <button id="muteButton" class="bg-red-600 hover:bg-red-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors w-full flex items-center justify-center space-x-2">
+              <!-- Filled via JS -->
+              <span>Mute</span>
+            </button>
+          </div>
         </div>
-        <div class="flex items-center space-x-2 text-sm text-gray-300" id="currentChannel">
-            <span>Loading channels...</span>
-        </div>
-    </header>
+      </div>
 
-    <div class="flex" style="height: calc(100vh - 4rem);">
-        <!-- Sidebar -->
-        <div id="sidebar" class="sidebar sidebar-toggle sidebar-hidden bg-gray-800 w-80 border-r border-gray-700 md:translate-x-0 flex flex-col">
-            <div class="p-4 flex-shrink-0">
-                <h2 class="text-lg font-semibold mb-4 text-blue-400">📋 Channels</h2>
-            </div>
-            <div id="channelList" class="space-y-2 flex-1 overflow-y-auto px-4 pb-4">
-                <div class="text-center py-8 text-gray-400">
-                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400 mx-auto mb-2"></div>
-                    Loading channels...
-                </div>
-            </div>
-            
-            <!-- Desktop Player Controls in Sidebar -->
-            <div class="bg-gray-700 p-4 flex-shrink-0 hidden md:block">
-                <div class="space-y-3">
-                    <div class="flex space-x-2">
-                        <button id="prevChannel" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1">
-                            ⏮️ Previous
-                        </button>
-                        <button id="nextChannel" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1">
-                            Next ⏭️
-                        </button>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button id="playStopButton" class="bg-green-600 hover:bg-green-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1">
-                            ⏸️ Stop
-                        </button>
-                        <button id="muteButton" class="bg-red-600 hover:bg-red-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1">
-                            🔊 Mute
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="p-4 pt-4 border-t border-gray-600 text-center flex-shrink-0">
-                <p class="text-xs text-gray-500">Powered by <a href="https://mushthaq.com" target="_blank" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
-            </div>
+      <div class="p-4 pt-4 border-t border-gray-600 text-center flex-shrink-0">
+        <p class="text-xs text-gray-500">Powered by <a href="https://mushthaq.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 flex flex-col">
+      <!-- Player -->
+      <div class="bg-black relative flex-1 md:h-full" style="height: calc(100vh - 8rem);">
+        <video
+          id="videoPlayer"
+          class="w-full h-full object-contain"
+          autoplay
+          playsinline
+          webkit-playsinline
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23111827'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='24'%3ESelect a channel to start%3C/text%3E%3C/svg%3E">
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Loading -->
+        <div id="loadingOverlay" class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+          <div class="text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
+            <p class="text-white">Loading channel...</p>
+          </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
-            <!-- Video Player - Full Height on Desktop -->
-            <div class="bg-black relative flex-1 md:h-full" style="height: calc(100vh - 8rem);">
-                <video 
-                    id="videoPlayer" 
-                    class="w-full h-full object-contain" 
-                    autoplay 
-                    playsinline
-                    webkit-playsinline
-                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23111827'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='24'%3ESelect a channel to start%3C/text%3E%3C/svg%3E">
-                    Your browser does not support the video tag.
-                </video>
-                
-                <!-- Loading overlay -->
-                <div id="loadingOverlay" class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
-                    <div class="text-center">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
-                        <p class="text-white">Loading channel...</p>
-                    </div>
-                </div>
-
-                <!-- Error overlay -->
-                <div id="errorOverlay" class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
-                    <div class="text-center p-8">
-                        <div class="text-red-400 text-6xl mb-4">⚠️</div>
-                        <p class="text-white text-lg mb-4">Unable to load this channel</p>
-                        <button id="retryButton" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-white">
-                            Try Again
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mobile Player Controls -->
-            <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center space-x-4 order-first">
-                <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
-                    ⏮️ Previous
-                </button>
-                <button id="playStopButtonMobile" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
-                    ⏸️ Stop
-                </button>
-                <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-lg font-semibold transition-colors">
-                    Next ⏭️
-                </button>
-            </div>
+        <!-- Error -->
+        <div id="errorOverlay" class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+          <div class="text-center p-8">
+            <div class="text-red-400 text-6xl mb-4">⚠️</div>
+            <p class="text-white text-lg mb-4">Unable to load this channel</p>
+            <button id="retryButton" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-white">
+              Try Again
+            </button>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- Mobile overlay -->
-    <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+      <!-- Mobile Controls -->
+      <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center gap-3 order-first">
+        <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
+          </svg>
+          <span>Previous</span>
+        </button>
 
-    <!-- Mobile watermark overlay -->
-    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
-        <p class="text-xs text-gray-400 bg-black bg-opacity-60 px-3 py-1 rounded-full">Powered by <a href="https://mushthaq.com" target="_blank" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a></p>
-    </div>
+        <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+          <!-- Filled via JS -->
+          <span>Mute</span>
+        </button>
 
-    <script>
-        class TVPlayer {
-            constructor() {
-                this.channels = [];
-                this.currentChannelIndex = 0;
-                this.player = document.getElementById('videoPlayer');
-                this.channelList = document.getElementById('channelList');
-                this.currentChannelDisplay = document.getElementById('currentChannel');
-                this.loadingOverlay = document.getElementById('loadingOverlay');
-                this.errorOverlay = document.getElementById('errorOverlay');
-                this.sidebar = document.getElementById('sidebar');
-                this.mobileOverlay = document.getElementById('mobileOverlay');
-                this.hls = null;
-                
-                this.initializeEventListeners();
-                this.loadPlaylist();
+        <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+          <span>Next</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile overlay for sidebar -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+  <!-- Mobile watermark -->
+  <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
+    <p class="text-xs text-gray-400 bg-black bg-opacity-60 px-3 py-1 rounded-full">
+      Powered by <a href="https://mushthaq.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a>
+    </p>
+  </div>
+
+  <script>
+    class TVPlayer {
+      constructor() {
+        this.channels = [];
+        this.currentChannelIndex = 0;
+        this.player = document.getElementById('videoPlayer');
+        this.channelList = document.getElementById('channelList');
+        this.currentChannelDisplay = document.getElementById('currentChannel');
+        this.loadingOverlay = document.getElementById('loadingOverlay');
+        this.errorOverlay = document.getElementById('errorOverlay');
+        this.sidebar = document.getElementById('sidebar');
+        this.mobileOverlay = document.getElementById('mobileOverlay');
+        this.hls = null;
+
+        this.initializeEventListeners();
+        this.loadPlaylist();
+      }
+
+      initializeEventListeners() {
+        // Sidebar toggle (mobile)
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+          this.toggleSidebar();
+        });
+        this.mobileOverlay.addEventListener('click', () => this.closeSidebar());
+
+        // Navigation
+        document.getElementById('prevChannel').addEventListener('click', () => this.previousChannel());
+        document.getElementById('nextChannel').addEventListener('click', () => this.nextChannel());
+
+        // Desktop mute
+        document.getElementById('muteButton').addEventListener('click', () => this.toggleMute());
+
+        // Mobile controls
+        document.getElementById('prevChannelMobile').addEventListener('click', () => this.previousChannel());
+        document.getElementById('nextChannelMobile').addEventListener('click', () => this.nextChannel());
+        document.getElementById('muteButtonMobile').addEventListener('click', () => this.toggleMute());
+
+        document.getElementById('retryButton').addEventListener('click', () => this.playCurrentChannel());
+
+        // Video events
+        this.player.addEventListener('loadstart', () => this.showLoading());
+        this.player.addEventListener('canplay', () => this.hideOverlays());
+        this.player.addEventListener('error', () => this.showError());
+
+        // Keyboard shortcuts (no spacebar toggle anymore)
+        document.addEventListener('keydown', (e) => {
+          switch (e.key) {
+            case 'ArrowUp':
+              e.preventDefault();
+              this.previousChannel();
+              break;
+            case 'ArrowDown':
+              e.preventDefault();
+              this.nextChannel();
+              break;
+            case 'm':
+            case 'M':
+              e.preventDefault();
+              this.toggleMute();
+              break;
+          }
+        });
+
+        // Initialize mute UI once
+        this.updateMuteButtonsUI();
+      }
+
+      async loadPlaylist() {
+        try {
+          const response = await fetch('https://raw.githubusercontent.com/mushthaqcom/tv/refs/heads/main/tv.m3u');
+          const playlistText = await response.text();
+          this.parseM3U(playlistText);
+          this.renderChannelList();
+          if (this.channels.length > 0) {
+            this.playCurrentChannel();
+          }
+        } catch (error) {
+          console.error('Error loading playlist:', error);
+          this.channelList.innerHTML = `
+            <div class="text-center py-8 text-red-400">
+              <div class="text-4xl mb-2">❌</div>
+              <p>Failed to load channels</p>
+              <button onclick="location.reload()" class="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white">
+                Retry
+              </button>
+            </div>
+          `;
+        }
+      }
+
+      parseM3U(content) {
+        const lines = content.split('\n');
+        this.channels = [];
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (!line.startsWith('#EXTINF:')) continue;
+
+          const nameMatch = line.match(/,(.+)$/);
+          const name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
+
+          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+          const logo = logoMatch ? logoMatch[1] : null;
+
+          let url = '';
+          for (let j = i + 1; j < lines.length; j++) {
+            const nextLine = lines[j].trim();
+            if (nextLine && !nextLine.startsWith('#')) {
+              url = nextLine;
+              break;
             }
+          }
 
-            initializeEventListeners() {
-                // Sidebar toggle for mobile
-                document.getElementById('sidebarToggle').addEventListener('click', () => {
-                    this.toggleSidebar();
-                });
+          if (url) this.channels.push({ name, url, logo, type: 'video' });
+        }
+      }
 
-                // Mobile overlay click
-                this.mobileOverlay.addEventListener('click', () => {
-                    this.closeSidebar();
-                });
-
-                // Channel navigation
-                document.getElementById('prevChannel').addEventListener('click', () => {
-                    this.previousChannel();
-                });
-
-                document.getElementById('nextChannel').addEventListener('click', () => {
-                    this.nextChannel();
-                });
-
-                // Desktop Player controls
-                document.getElementById('muteButton').addEventListener('click', () => {
-                    this.toggleMute();
-                });
-
-                document.getElementById('playStopButton').addEventListener('click', () => {
-                    this.togglePlayStop();
-                });
-
-                // Mobile Player controls
-                document.getElementById('playStopButtonMobile').addEventListener('click', () => {
-                    this.togglePlayStop();
-                });
-
-                document.getElementById('prevChannelMobile').addEventListener('click', () => {
-                    this.previousChannel();
-                });
-
-                document.getElementById('nextChannelMobile').addEventListener('click', () => {
-                    this.nextChannel();
-                });
-
-                document.getElementById('retryButton').addEventListener('click', () => {
-                    this.playCurrentChannel();
-                });
-
-                // Video events
-                this.player.addEventListener('loadstart', () => {
-                    this.showLoading();
-                });
-
-                this.player.addEventListener('canplay', () => {
-                    this.hideOverlays();
-                });
-
-                this.player.addEventListener('error', () => {
-                    this.showError();
-                });
-
-                this.player.addEventListener('play', () => {
-                    document.getElementById('playStopButton').innerHTML = '⏸️ Stop';
-                    document.getElementById('playStopButtonMobile').innerHTML = '⏸️ Stop';
-                });
-
-                this.player.addEventListener('pause', () => {
-                    document.getElementById('playStopButton').innerHTML = '▶️ Play';
-                    document.getElementById('playStopButtonMobile').innerHTML = '▶️ Play';
-                });
-
-                // Keyboard shortcuts
-                document.addEventListener('keydown', (e) => {
-                    switch(e.key) {
-                        case 'ArrowUp':
-                            e.preventDefault();
-                            this.previousChannel();
-                            break;
-                        case 'ArrowDown':
-                            e.preventDefault();
-                            this.nextChannel();
-                            break;
-                        case ' ':
-                            e.preventDefault();
-                            this.player.paused ? this.player.play() : this.player.pause();
-                            break;
-                        case 'm':
-                            this.toggleMute();
-                            break;
-                    }
-                });
-            }
-
-            async loadPlaylist() {
-                try {
-                    const response = await fetch('https://raw.githubusercontent.com/mushthaqcom/tv/refs/heads/main/tv.m3u');
-                    const playlistText = await response.text();
-                    this.parseM3U(playlistText);
-                    this.renderChannelList();
-                    if (this.channels.length > 0) {
-                        this.playCurrentChannel();
-                    }
-                } catch (error) {
-                    console.error('Error loading playlist:', error);
-                    this.channelList.innerHTML = `
-                        <div class="text-center py-8 text-red-400">
-                            <div class="text-4xl mb-2">❌</div>
-                            <p>Failed to load channels</p>
-                            <button onclick="location.reload()" class="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white">
-                                Retry
-                            </button>
-                        </div>
-                    `;
-                }
-            }
-
-            parseM3U(content) {
-                const lines = content.split('\n');
-                this.channels = [];
-                
-                // Parse all channels from M3U
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    if (line.startsWith('#EXTINF:')) {
-                        const nameMatch = line.match(/,(.+)$/);
-                        const name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
-                        
-                        // Extract logo URL from tvg-logo attribute
-                        const logoMatch = line.match(/tvg-logo="([^"]+)"/);
-                        const logo = logoMatch ? logoMatch[1] : null;
-                        
-                        // Get the next non-empty line as URL
-                        let url = '';
-                        for (let j = i + 1; j < lines.length; j++) {
-                            const nextLine = lines[j].trim();
-                            if (nextLine && !nextLine.startsWith('#')) {
-                                url = nextLine;
-                                break;
-                            }
-                        }
-                        
-                        if (url) {
-                            this.channels.push({ name, url, logo, type: 'video' });
-                        }
-                    }
-                }
-            }
-
-            renderChannelList() {
-                if (this.channels.length === 0) {
-                    this.channelList.innerHTML = `
-                        <div class="text-center py-8 text-gray-400">
-                            <div class="text-4xl mb-2">📺</div>
-                            <p>No channels found</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                this.channelList.innerHTML = this.channels.map((channel, index) => `
-                    <div class="channel-item p-3 rounded-lg cursor-pointer transition-colors ${index === this.currentChannelIndex ? 'active' : ''}" 
-                         data-index="${index}">
-                        <div class="flex items-center space-x-3">
-                            ${channel.logo ? 
-                                `<img src="${channel.logo}" alt="${channel.name}" class="w-8 h-8 object-contain flex-shrink-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style="display: none;">${index + 1}</div>` : 
-                                `<div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">${index + 1}</div>`
-                            }
-                            <div class="flex-1 min-w-0">
-                                <div class="text-sm font-medium truncate">${channel.name}</div>
-                            </div>
-
-                        </div>
-                    </div>
-                `).join('');
-
-                // Add click listeners to channel items
-                this.channelList.querySelectorAll('.channel-item').forEach(item => {
-                    item.addEventListener('click', () => {
-                        const index = parseInt(item.dataset.index);
-                        this.selectChannel(index);
-                        this.closeSidebar();
-                    });
-                });
-            }
-
-            selectChannel(index) {
-                if (index >= 0 && index < this.channels.length) {
-                    this.currentChannelIndex = index;
-                    this.updateActiveChannel();
-                    this.playCurrentChannel();
-                }
-            }
-
-            updateActiveChannel() {
-                this.channelList.querySelectorAll('.channel-item').forEach((item, index) => {
-                    item.classList.toggle('active', index === this.currentChannelIndex);
-                });
-                
-                if (this.channels[this.currentChannelIndex]) {
-                    const channel = this.channels[this.currentChannelIndex];
-                    this.currentChannelDisplay.innerHTML = `
-                        ${channel.logo ? 
-                            `<img src="${channel.logo}" alt="${channel.name}" class="w-6 h-6 rounded object-cover" onerror="this.style.display='none';">` : 
-                            ''
-                        }
-                        <span>${channel.name}</span>
-                    `;
-                }
-            }
-
-            playCurrentChannel() {
-                if (this.channels.length === 0) return;
-                
-                const channel = this.channels[this.currentChannelIndex];
-                this.updateActiveChannel();
-                
-                // Clean up previous HLS instance
-                if (this.hls) {
-                    this.hls.destroy();
-                    this.hls = null;
-                }
-                
-                const videoContainer = this.player.parentElement;
-                
-                // Check if this is an iframe channel (like ITN)
-                if (channel.type === 'iframe') {
-                    // Hide video player and show iframe
-                    this.player.style.display = 'none';
-                    
-                    // Remove any existing iframe
-                    const existingIframe = videoContainer.querySelector('iframe');
-                    if (existingIframe) {
-                        existingIframe.remove();
-                    }
-                    
-                    // Create new iframe
-                    const iframe = document.createElement('iframe');
-                    iframe.src = channel.url;
-                    iframe.className = 'w-full h-full';
-                    iframe.style.border = 'none';
-                    iframe.allow = 'autoplay; fullscreen';
-                    iframe.allowFullscreen = true;
-                    
-                    videoContainer.appendChild(iframe);
-                    this.hideOverlays();
-                } else if (channel.type === 'youtube') {
-                    // Hide video player and show YouTube iframe
-                    this.player.style.display = 'none';
-                    
-                    // Remove any existing iframe
-                    const existingIframe = videoContainer.querySelector('iframe');
-                    if (existingIframe) {
-                        existingIframe.remove();
-                    }
-                    
-                    // Create new iframe for YouTube
-                    const iframe = document.createElement('iframe');
-                    iframe.src = channel.url;
-                    iframe.className = 'w-full h-full';
-                    iframe.style.border = 'none';
-                    iframe.allow = 'autoplay; fullscreen; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                    iframe.allowFullscreen = true;
-                    iframe.sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms';
-                    
-                    videoContainer.appendChild(iframe);
-                    this.hideOverlays();
-                } else {
-                    // Show video player and remove any iframe
-                    this.player.style.display = 'block';
-                    const existingIframe = videoContainer.querySelector('iframe');
-                    if (existingIframe) {
-                        existingIframe.remove();
-                    }
-                    
-                    // Check if the URL is an HLS stream (.m3u8)
-                    if (channel.url.includes('.m3u8') || channel.url.includes('m3u8')) {
-                        if (Hls.isSupported()) {
-                            // Use HLS.js for HLS streams
-                            this.hls = new Hls({
-                                enableWorker: true,
-                                lowLatencyMode: true,
-                                backBufferLength: 90
-                            });
-                            
-                            this.hls.loadSource(channel.url);
-                            this.hls.attachMedia(this.player);
-                            
-                            this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                                this.player.play().catch(error => {
-                                    console.log('Auto-play prevented:', error);
-                                });
-                            });
-                            
-                            this.hls.on(Hls.Events.ERROR, (event, data) => {
-                                console.error('HLS Error:', data);
-                                if (data.fatal) {
-                                    this.showError();
-                                }
-                            });
-                        } else if (this.player.canPlayType('application/vnd.apple.mpegurl')) {
-                            // Native HLS support (Safari)
-                            this.player.src = channel.url;
-                            this.player.load();
-                            this.player.play().catch(error => {
-                                console.log('Auto-play prevented:', error);
-                            });
-                        } else {
-                            console.error('HLS not supported');
-                            this.showError();
-                        }
-                    } else {
-                        // Regular video file
-                        this.player.src = channel.url;
-                        this.player.load();
-                        this.player.play().catch(error => {
-                            console.log('Auto-play prevented:', error);
-                        });
-                    }
-                }
-            }
-
-            previousChannel() {
-                if (this.channels.length === 0) return;
-                this.currentChannelIndex = (this.currentChannelIndex - 1 + this.channels.length) % this.channels.length;
-                this.playCurrentChannel();
-            }
-
-            nextChannel() {
-                if (this.channels.length === 0) return;
-                this.currentChannelIndex = (this.currentChannelIndex + 1) % this.channels.length;
-                this.playCurrentChannel();
-            }
-
-            toggleMute() {
-                this.player.muted = !this.player.muted;
-                const muteIcon = this.player.muted ? '🔇' : '🔊';
-                const muteText = this.player.muted ? 'Unmute' : 'Mute';
-                document.getElementById('muteButton').innerHTML = `${muteIcon} ${muteText}`;
-            }
-
-            togglePlayStop() {
-                if (this.player.paused) {
-                    this.player.play().catch(error => {
-                        console.log('Play error:', error);
-                    });
-                    document.getElementById('playStopButton').innerHTML = '⏸️ Stop';
-                    document.getElementById('playStopButtonMobile').innerHTML = '⏸️ Stop';
-                } else {
-                    this.player.pause();
-                    document.getElementById('playStopButton').innerHTML = '▶️ Play';
-                    document.getElementById('playStopButtonMobile').innerHTML = '▶️ Play';
-                }
-            }
-
-            toggleSidebar() {
-                this.sidebar.classList.toggle('sidebar-hidden');
-                this.mobileOverlay.classList.toggle('hidden');
-            }
-
-            closeSidebar() {
-                this.sidebar.classList.add('sidebar-hidden');
-                this.mobileOverlay.classList.add('hidden');
-            }
-
-            showLoading() {
-                this.loadingOverlay.classList.remove('hidden');
-                this.errorOverlay.classList.add('hidden');
-            }
-
-            showError() {
-                this.loadingOverlay.classList.add('hidden');
-                this.errorOverlay.classList.remove('hidden');
-            }
-
-            hideOverlays() {
-                this.loadingOverlay.classList.add('hidden');
-                this.errorOverlay.classList.add('hidden');
-            }
+      renderChannelList() {
+        if (this.channels.length === 0) {
+          this.channelList.innerHTML = `
+            <div class="text-center py-8 text-gray-400">
+              <div class="text-4xl mb-2">📺</div>
+              <p>No channels found</p>
+            </div>
+          `;
+          return;
         }
 
-        // Initialize the TV player when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            new TVPlayer();
-            
-            // Register Service Worker for PWA
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdvbmxpbmUtdHYtdjEnOwpjb25zdCB1cmxzVG9DYWNoZSA9IFsKICAnLycsIAogICcuL2xvZ28ucG5nJwpdOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpCiAgICAgIC50aGVuKGNhY2hlID0+IGNhY2hlLmFkZEFsbCh1cmxzVG9DYWNoZSkpCiAgKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZXZlbnQgPT4gewogIGV2ZW50LnJlc3BvbmRXaXRoKAogICAgY2FjaGVzLm1hdGNoKGV2ZW50LnJlcXVlc3QpCiAgICAgIC50aGVuKHJlc3BvbnNlID0+IHsKICAgICAgICBpZiAocmVzcG9uc2UpIHsKICAgICAgICAgIHJldHVybiByZXNwb25zZTsKICAgICAgICB9CiAgICAgICAgcmV0dXJuIGZldGNoKGV2ZW50LnJlcXVlc3QpOwogICAgICB9KQogICk7Cn0pOw==')
-                .then(registration => {
-                    console.log('Service Worker registered successfully:', registration);
-                })
-                .catch(error => {
-                    console.log('Service Worker registration failed:', error);
-                });
-            }
+        this.channelList.innerHTML = this.channels.map((channel, index) => `
+          <div class="channel-item p-3 rounded-lg cursor-pointer transition-colors ${index === this.currentChannelIndex ? 'active' : ''}" data-index="${index}">
+            <div class="flex items-center space-x-3">
+              ${channel.logo
+                ? `<img src="${channel.logo}" alt="${channel.name}" class="w-8 h-8 object-contain flex-shrink-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                   <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style="display:none;">${index + 1}</div>`
+                : `<div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">${index + 1}</div>`
+              }
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">${channel.name}</div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        this.channelList.querySelectorAll('.channel-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const i = parseInt(item.dataset.index);
+            this.selectChannel(i);
+            this.closeSidebar();
+          });
         });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981347e2a7aeac45',t:'MTc1ODIyNDA2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+      }
+
+      selectChannel(index) {
+        if (index >= 0 && index < this.channels.length) {
+          this.currentChannelIndex = index;
+          this.updateActiveChannel();
+          this.playCurrentChannel();
+        }
+      }
+
+      updateActiveChannel() {
+        const items = this.channelList.querySelectorAll('.channel-item');
+        items.forEach((item, idx) => {
+          item.classList.toggle('active', idx === this.currentChannelIndex);
+        });
+
+        // Auto-scroll active item into view
+        const activeItem = items[this.currentChannelIndex];
+        if (activeItem && activeItem.scrollIntoView) {
+          activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        if (this.channels[this.currentChannelIndex]) {
+          const channel = this.channels[this.currentChannelIndex];
+          this.currentChannelDisplay.innerHTML = `
+            ${channel.logo ? `<img src="${channel.logo}" alt="${channel.name}" class="w-6 h-6 rounded object-cover" onerror="this.style.display='none';">` : ''}
+            <span>${channel.name}</span>
+          `;
+        }
+      }
+
+      playCurrentChannel() {
+        if (this.channels.length === 0) return;
+
+        const channel = this.channels[this.currentChannelIndex];
+        this.updateActiveChannel();
+
+        // Cleanup HLS
+        if (this.hls) {
+          this.hls.destroy();
+          this.hls = null;
+        }
+
+        const videoContainer = this.player.parentElement;
+
+        // Iframe channel (none currently, but supported)
+        if (channel.type === 'iframe') {
+          this.player.style.display = 'none';
+          const existingIframe = videoContainer.querySelector('iframe');
+          if (existingIframe) existingIframe.remove();
+
+          const iframe = document.createElement('iframe');
+          iframe.src = channel.url;
+          iframe.className = 'w-full h-full';
+          iframe.style.border = 'none';
+          iframe.allow = 'autoplay; fullscreen';
+          iframe.allowFullscreen = true;
+          videoContainer.appendChild(iframe);
+          this.hideOverlays();
+          return;
+        }
+
+        // YouTube channel (if used)
+        if (channel.type === 'youtube') {
+          this.player.style.display = 'none';
+          const existingIframe = videoContainer.querySelector('iframe');
+          if (existingIframe) existingIframe.remove();
+
+          const iframe = document.createElement('iframe');
+          iframe.src = channel.url;
+          iframe.className = 'w-full h-full';
+          iframe.style.border = 'none';
+          iframe.allow = 'autoplay; fullscreen; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allowFullscreen = true;
+          iframe.sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms';
+          videoContainer.appendChild(iframe);
+          this.hideOverlays();
+          return;
+        }
+
+        // Regular/HLS video
+        this.player.style.display = 'block';
+        const existingIframe = videoContainer.querySelector('iframe');
+        if (existingIframe) existingIframe.remove();
+
+        if (channel.url.includes('.m3u8')) {
+          if (Hls.isSupported()) {
+            this.hls = new Hls({ enableWorker: true, lowLatencyMode: true, backBufferLength: 90 });
+            this.hls.loadSource(channel.url);
+            this.hls.attachMedia(this.player);
+            this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              this.player.play().catch(() => {});
+            });
+            this.hls.on(Hls.Events.ERROR, (_event, data) => {
+              if (data.fatal) this.showError();
+            });
+          } else if (this.player.canPlayType('application/vnd.apple.mpegurl')) {
+            this.player.src = channel.url;
+            this.player.load();
+            this.player.play().catch(() => {});
+          } else {
+            this.showError();
+          }
+        } else {
+          this.player.src = channel.url;
+          this.player.load();
+          this.player.play().catch(() => {});
+        }
+      }
+
+      previousChannel() {
+        if (this.channels.length === 0) return;
+        this.currentChannelIndex = (this.currentChannelIndex - 1 + this.channels.length) % this.channels.length;
+        this.playCurrentChannel();
+      }
+
+      nextChannel() {
+        if (this.channels.length === 0) return;
+        this.currentChannelIndex = (this.currentChannelIndex + 1) % this.channels.length;
+        this.playCurrentChannel();
+      }
+
+      toggleMute() {
+        this.player.muted = !this.player.muted;
+        this.updateMuteButtonsUI();
+      }
+
+      updateMuteButtonsUI() {
+        const isMuted = this.player.muted;
+        const desktopBtn = document.getElementById('muteButton');
+        const mobileBtn = document.getElementById('muteButtonMobile');
+
+        const unmutedIcon = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5l-4 4H5v6h2l4 4V5z" />
+          </svg>
+        `;
+        const mutedIcon = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5l-4 4H5v6h2l4 4V5z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-6 6M19 15l-6-6" />
+          </svg>
+        `;
+        const label = isMuted ? 'Unmute' : 'Mute';
+
+        if (desktopBtn) desktopBtn.innerHTML = `${isMuted ? mutedIcon : unmutedIcon}<span class="ml-2">${label}</span>`;
+        if (mobileBtn) mobileBtn.innerHTML = `${isMuted ? mutedIcon : unmutedIcon}<span class="ml-2">${label}</span>`;
+      }
+
+      toggleSidebar() {
+        this.sidebar.classList.toggle('sidebar-hidden');
+        this.mobileOverlay.classList.toggle('hidden');
+      }
+
+      closeSidebar() {
+        this.sidebar.classList.add('sidebar-hidden');
+        this.mobileOverlay.classList.add('hidden');
+      }
+
+      showLoading() {
+        this.loadingOverlay.classList.remove('hidden');
+        this.errorOverlay.classList.add('hidden');
+      }
+
+      showError() {
+        this.loadingOverlay.classList.add('hidden');
+        this.errorOverlay.classList.remove('hidden');
+      }
+
+      hideOverlays() {
+        this.loadingOverlay.classList.add('hidden');
+        this.errorOverlay.classList.add('hidden');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new TVPlayer();
+
+      // Demo service worker (cache logo only)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdvbmxpbmUtdHYtdjEnOwpjb25zdCB1cmxzVG9DYWNoZSA9IFsKICAnLycsIAogICcuL2xvZ28ucG5nJwpdOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpCiAgICAgIC50aGVuKGNhY2hlID0+IGNhY2hlLmFkZEFsbCh1cmxzVG9DYWNoZSkpCiAgKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZXZlbnQgPT4gewogIGV2ZW50LnJlc3BvbmRXaXRoKAogICAgY2FjaGVzLm1hdGNoKGV2ZW50LnJlcXVlc3QpCiAgICAgIC50aGVuKHJlc3BvbnNlID0+IHsKICAgICAgICBpZiAocmVzcG9uc2UpIHsKICAgICAgICAgIHJldHVybiByZXNwb25zZTsKICAgICAgICB9CiAgICAgICAgcmV0dXJuIGZldGNoKGV2ZW50LnJlcXVlc3QpOwogICAgICB9KQogICk7Cn0pOw==')
+          .then(r => console.log('Service Worker registered', r))
+          .catch(e => console.log('Service Worker registration failed', e));
+      }
+    });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98197bcf107c36d7',t:'MTc1ODI4OTEwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
