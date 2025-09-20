@@ -157,24 +157,26 @@
       </div>
 
       <!-- Mobile Controls -->
-      <div class="bg-gray-800 p-4 flex md:hidden items-center justify-center gap-3 order-first">
-        <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
-          </svg>
-          <span>Previous</span>
-        </button>
+      <div class="bg-gray-800 p-4 flex md:hidden flex-col items-center justify-center gap-3 order-first">
+        <div class="w-full flex items-center justify-center gap-3">
+          <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
+            </svg>
+            <span>Previous</span>
+          </button>
 
-        <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+          <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+            <span>Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 w-full max-w-xs justify-center">
           <!-- Filled via JS -->
           <span>Mute</span>
-        </button>
-
-        <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
-          <span>Next</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
-          </svg>
         </button>
       </div>
     </main>
@@ -600,5 +602,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981990061658aabd',t:'MTc1ODI4OTkzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9820ae0b2226a247',t:'MTc1ODM2NDU2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
