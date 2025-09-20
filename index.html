@@ -49,9 +49,6 @@
     .sidebar-hidden { transform: translateX(-100%); }
     @media (max-width: 768px) {
       .sidebar { position: fixed; z-index: 50; height: 100vh; }
-      /* Try to keep native controls visible on mobile browsers */
-      #videoPlayer::-webkit-media-controls-panel { opacity: 1 !important; visibility: visible !important; }
-      #videoPlayer::-webkit-media-controls { opacity: 1 !important; }
     }
   </style>
 </head>
@@ -253,32 +250,19 @@
         this.initializeEventListeners();
         this.loadPlaylist();
 
-        // Show native controls on mobile only
-        this.setNativeControlsForViewport(true);
-        window.addEventListener('resize', () => this.setNativeControlsForViewport(true));
-        window.addEventListener('orientationchange', () => this.setNativeControlsForViewport(true));
+        // Show native controls only when the device wants to
+        this.setNativeControlsForViewport(false);
+        window.addEventListener('resize', () => this.setNativeControlsForViewport(false));
+        window.addEventListener('orientationchange', () => this.setNativeControlsForViewport(false));
       }
 
       setNativeControlsForViewport(alwaysShow = false) {
         const isMobile = window.innerWidth < 768;
         // Use native controls on mobile, hide on larger screens
         this.player.controls = isMobile;
-        // If asked, try to keep controls visible on mobile
-        if (alwaysShow && isMobile) {
-          try {
-            // Some mobile browsers will auto-hide; this nudges them to show
-            this.player.setAttribute('controls', 'controls');
-            this.player.controls = true;
-            // Briefly toggle play/pause to surface the controls without changing state
-            const wasPaused = this.player.paused;
-            if (!wasPaused) {
-              this.player.pause();
-              setTimeout(() => this.player.play().catch(() => {}), 50);
-            } else {
-              this.player.play().catch(() => {});
-              setTimeout(() => this.player.pause(), 150);
-            }
-          } catch (e) { /* noop */ }
+        // Do not force controls to stay visible; let the browser manage visibility
+        if (!isMobile) {
+          this.player.removeAttribute('controls');
         }
       }
 
@@ -643,5 +627,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98226a7103a6aaf2',t:'MTc1ODM4Mjc2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9822712044f6aaf2',t:'MTc1ODM4MzA0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
