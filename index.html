@@ -41,6 +41,8 @@
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
   <style>
+    * { box-sizing: border-box; }
+    html, body { overflow-x: hidden; }
     .channel-item:hover { background-color: #1f2937; }
     .channel-item.active { background-color: #3b82f6; }
     .sidebar-toggle { transition: transform 0.3s ease; }
@@ -70,14 +72,14 @@
     </div>
   </header>
 
-  <div class="flex" style="height: calc(100vh - 4rem);">
+  <div class="flex w-full overflow-x-hidden" style="height: calc(100vh - 4rem);">
     <!-- Sidebar -->
     <aside id="sidebar" class="sidebar sidebar-toggle sidebar-hidden bg-gray-800 w-80 border-r border-gray-700 md:translate-x-0 flex flex-col">
       <div class="p-4 flex-shrink-0">
         <h2 class="text-lg font-semibold mb-4 text-blue-400">📋 Channels</h2>
       </div>
 
-      <div id="channelList" class="space-y-2 flex-1 overflow-y-auto px-4 pb-4">
+      <div id="channelList" class="space-y-2 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         <div class="text-center py-8 text-gray-400">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400 mx-auto mb-2"></div>
           Loading channels...
@@ -157,16 +159,16 @@
       </div>
 
       <!-- Mobile Controls -->
-      <div class="bg-gray-800 p-4 flex md:hidden flex-col items-center justify-center gap-3 order-first">
-        <div class="w-full flex items-center justify-center gap-3">
-          <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+      <div class="bg-gray-800 p-4 flex md:hidden flex-col items-center justify-center gap-3 order-first w-full overflow-x-hidden">
+        <div class="w-full flex items-center justify-center gap-3 overflow-x-hidden">
+          <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 whitespace-nowrap">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
             </svg>
             <span>Previous</span>
           </button>
 
-          <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2">
+          <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 whitespace-nowrap">
             <span>Next</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
@@ -193,7 +195,7 @@
   </div>
 
   <!-- Instructions Modal -->
-  <div id="instructionsModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden">
+  <div id="instructionsModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden overflow-x-hidden">
     <div class="absolute inset-0 flex items-center justify-center p-4">
       <div class="w-full max-w-lg bg-gray-900 border border-gray-700 rounded-xl shadow-xl overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-800">
@@ -602,5 +604,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9820ae0b2226a247',t:'MTc1ODM2NDU2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9820b616d7e0a247',t:'MTc1ODM2NDg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
