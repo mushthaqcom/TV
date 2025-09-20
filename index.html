@@ -47,15 +47,11 @@
     .channel-item.active { background-color: #3b82f6; }
     .sidebar-toggle { transition: transform 0.3s ease; }
     .sidebar-hidden { transform: translateX(-100%); }
-
-    /* Mobile fullscreen styles (native fullscreen) */
-    .mobile-fs-ui { position: absolute; inset: 0; pointer-events: none; }
-    .mobile-fs-ui .panel, .mobile-fs-ui .controls { pointer-events: auto; }
-    .mobile-fs-ui.hidden-ui .panel, .mobile-fs-ui.hidden-ui .controls { opacity: 0; pointer-events: none; }
-    .mobile-fs-ui .panel, .mobile-fs-ui .controls { transition: opacity 0.25s ease; }
-
     @media (max-width: 768px) {
       .sidebar { position: fixed; z-index: 50; height: 100vh; }
+      /* Try to keep native controls visible on mobile browsers */
+      #videoPlayer::-webkit-media-controls-panel { opacity: 1 !important; visibility: visible !important; }
+      #videoPlayer::-webkit-media-controls { opacity: 1 !important; }
     }
   </style>
 </head>
@@ -71,7 +67,7 @@
       <div class="flex items-center space-x-3">
         <img src="./logo.png" alt="Online TV Logo" class="w-8 h-8" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
         <span class="text-2xl" style="display:none;">📺</span>
-        <h1 class="text-2xl font-bold text-blue-400">Online TV <span class="text-sm text-gray-400 font-normal">v1.09</span></h1>
+        <h1 class="text-2xl font-bold text-blue-400">Online TV <span class="text-sm text-gray-400 font-normal">v2.20</span></h1>
       </div>
     </div>
     <div class="flex items-center space-x-2 text-sm text-gray-300" id="currentChannel">
@@ -94,16 +90,16 @@
       </div>
 
       <!-- Desktop Controls -->
-      <div class="bg-gray-700 p-4 flex-shrink-0 hidden md:block">
+      <div class="bg-gray-700/60 backdrop-blur-xl p-4 flex-shrink-0 hidden md:block">
         <div class="space-y-3">
           <div class="flex space-x-2">
-            <button id="prevChannel" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1 flex items-center justify-center space-x-2">
+            <button id="prevChannel" class="bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg px-4 py-3 rounded-xl text-sm font-semibold transition-all flex-1 flex items-center justify-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
               </svg>
               <span>Previous</span>
             </button>
-            <button id="nextChannel" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors flex-1 flex items-center justify-center space-x-2">
+            <button id="nextChannel" class="bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg px-4 py-3 rounded-xl text-sm font-semibold transition-all flex-1 flex items-center justify-center gap-2">
               <span>Next</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
@@ -111,7 +107,7 @@
             </button>
           </div>
           <div class="flex">
-            <button id="muteButton" class="bg-red-600 hover:bg-red-700 px-4 py-3 rounded-lg text-sm font-semibold transition-colors w-full flex items-center justify-center space-x-2">
+            <button id="muteButton" class="bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg px-4 py-3 rounded-xl text-sm font-semibold transition-all w-full flex items-center justify-center gap-2 text-white">
               <span>Mute</span>
             </button>
           </div>
@@ -166,16 +162,16 @@
       </div>
 
       <!-- Mobile Controls -->
-      <div class="bg-gray-800 p-4 flex md:hidden flex-col items-center justify-center gap-3 order-first w-full overflow-x-hidden">
+      <div class="bg-gray-800/60 backdrop-blur-xl p-4 flex md:hidden flex-col items-center justify-center gap-3 order-first w-full overflow-x-hidden">
         <div class="w-full flex items-center justify-center gap-3 overflow-x-hidden">
-          <button id="prevChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 whitespace-nowrap">
+          <button id="prevChannelMobile" class="bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg px-4 py-3 rounded-2xl text-base font-semibold transition-all flex items-center gap-2 whitespace-nowrap text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
             </svg>
             <span>Previous</span>
           </button>
 
-          <button id="nextChannelMobile" class="bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 whitespace-nowrap">
+          <button id="nextChannelMobile" class="bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg px-4 py-3 rounded-2xl text-base font-semibold transition-all flex items-center gap-2 whitespace-nowrap text-white">
             <span>Next</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
@@ -183,14 +179,9 @@
           </button>
         </div>
 
-        <div class="w-full max-w-xs grid grid-cols-2 gap-3">
-          <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 justify-center">
-            <span>Mute</span>
-          </button>
-          <button id="fullscreenButtonMobile" class="bg-blue-700 hover:bg-blue-800 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 justify-center">
-            <span>Fullscreen</span>
-          </button>
-        </div>
+        <button id="muteButtonMobile" class="bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg px-5 py-3 rounded-2xl text-base font-semibold transition-all flex items-center gap-2 w-full max-w-xs justify-center text-white">
+          <span>Mute</span>
+        </button>
       </div>
     </main>
   </div>
@@ -198,27 +189,8 @@
   <!-- Mobile overlay for sidebar -->
   <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
 
-  <!-- Mobile Fullscreen UI (overlay that appears in native fullscreen) -->
-  <div id="mobileFsUI" class="mobile-fs-ui hidden md:hidden">
-    <div class="absolute inset-0" id="mobileFsClickCatcher"></div>
-    <!-- Left channel list panel -->
-    <div id="mobileFsPanel" class="panel absolute left-0 top-0 bottom-0 w-56 max-w-[70vw] bg-gray-900/95 border-r border-gray-800 overflow-y-auto p-3">
-      <h3 class="text-sm font-semibold text-blue-400 mb-2">Channels</h3>
-      <div id="mobileFsChannelList" class="space-y-2 pr-1"></div>
-      <div class="mt-3 grid grid-cols-3 gap-2">
-        <button id="fsPrev" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-xs">Prev</button>
-        <button id="fsMute" class="bg-red-600 hover:bg-red-700 px-3 py-2 rounded text-xs">Mute</button>
-        <button id="fsNext" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-xs">Next</button>
-      </div>
-    </div>
-    <!-- Top controls -->
-    <div class="controls absolute right-3 top-3 flex items-center gap-2">
-      <button id="exitFsBtn" class="bg-gray-800/80 hover:bg-gray-700 text-white text-xs px-3 py-2 rounded">Exit</button>
-    </div>
-  </div>
-
-  <!-- Mobile watermark: hidden when menu opens or in fullscreen -->
-  <div id="mobileWatermark" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 md:hidden transition-opacity">
+  <!-- Mobile watermark: hidden when menu opens -->
+  <div id="mobileWatermark" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
     <p class="text-xs text-gray-400 bg-black bg-opacity-60 px-3 py-1 rounded-full">
       Powered by <a href="https://mushthaq.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">Mushthaq.com</a>
     </p>
@@ -280,6 +252,34 @@
 
         this.initializeEventListeners();
         this.loadPlaylist();
+
+        // Show native controls on mobile only
+        this.setNativeControlsForViewport(true);
+        window.addEventListener('resize', () => this.setNativeControlsForViewport(true));
+        window.addEventListener('orientationchange', () => this.setNativeControlsForViewport(true));
+      }
+
+      setNativeControlsForViewport(alwaysShow = false) {
+        const isMobile = window.innerWidth < 768;
+        // Use native controls on mobile, hide on larger screens
+        this.player.controls = isMobile;
+        // If asked, try to keep controls visible on mobile
+        if (alwaysShow && isMobile) {
+          try {
+            // Some mobile browsers will auto-hide; this nudges them to show
+            this.player.setAttribute('controls', 'controls');
+            this.player.controls = true;
+            // Briefly toggle play/pause to surface the controls without changing state
+            const wasPaused = this.player.paused;
+            if (!wasPaused) {
+              this.player.pause();
+              setTimeout(() => this.player.play().catch(() => {}), 50);
+            } else {
+              this.player.play().catch(() => {});
+              setTimeout(() => this.player.pause(), 150);
+            }
+          } catch (e) { /* noop */ }
+        }
       }
 
       initializeEventListeners() {
@@ -300,8 +300,6 @@
         document.getElementById('prevChannelMobile').addEventListener('click', () => this.previousChannel());
         document.getElementById('nextChannelMobile').addEventListener('click', () => this.nextChannel());
         document.getElementById('muteButtonMobile').addEventListener('click', () => this.toggleMute());
-        const fsBtn = document.getElementById('fullscreenButtonMobile');
-        if (fsBtn) fsBtn.addEventListener('click', () => this.requestNativeFullscreen());
 
         document.getElementById('retryButton').addEventListener('click', () => this.playCurrentChannel());
 
@@ -310,7 +308,7 @@
         this.player.addEventListener('canplay', () => this.hideOverlays());
         this.player.addEventListener('error', () => this.showError());
 
-        // Keyboard shortcuts (no spacebar toggle anymore)
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
           switch (e.key) {
             case 'ArrowUp':
@@ -339,19 +337,6 @@
         if (openBtn && modal) {
           openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
         }
-
-        // Keep fullscreen UI updated with channel changes
-        const onChannelChange = () => {
-          const ui = document.getElementById('mobileFsUI');
-          if (ui && !ui.classList.contains('hidden')) this.populateFsChannelList();
-        };
-        // Hook into next/prev to refresh list on change
-        const origNext = this.nextChannel.bind(this);
-        this.nextChannel = () => { origNext(); onChannelChange(); };
-        const origPrev = this.previousChannel.bind(this);
-        this.previousChannel = () => { origPrev(); onChannelChange(); };
-        const origSelect = this.selectChannel.bind(this);
-        this.selectChannel = (i) => { origSelect(i); onChannelChange(); };
         if (closeBtn && modal) {
           closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
         }
@@ -360,12 +345,6 @@
             if (e.target === modal) modal.classList.add('hidden');
           });
         }
-
-        // Sync overlay with native fullscreen changes
-        document.addEventListener('fullscreenchange', () => {
-          const fsActive = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-          if (!fsActive) this.onExitNativeFullscreen();
-        });
 
         // Copy playlist button
         const copyBtn = document.getElementById('copyM3uBtn');
@@ -418,22 +397,22 @@
           const line = lines[i].trim();
           if (!line.startsWith('#EXTINF:')) continue;
 
-        const nameMatch = line.match(/,(.+)$/);
-        const name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
+          const nameMatch = line.match(/,(.+)$/);
+          const name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
 
-        const logoMatch = line.match(/tvg-logo="([^"]+)"/);
-        const logo = logoMatch ? logoMatch[1] : null;
+          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+          const logo = logoMatch ? logoMatch[1] : null;
 
-        let url = '';
-        for (let j = i + 1; j < lines.length; j++) {
-          const nextLine = lines[j].trim();
-          if (nextLine && !nextLine.startsWith('#')) {
-            url = nextLine;
-            break;
+          let url = '';
+          for (let j = i + 1; j < lines.length; j++) {
+            const nextLine = lines[j].trim();
+            if (nextLine && !nextLine.startsWith('#')) {
+              url = nextLine;
+              break;
+            }
           }
-        }
 
-        if (url) this.channels.push({ name, url, logo, type: 'video' });
+          if (url) this.channels.push({ name, url, logo, type: 'video' });
         }
       }
 
@@ -515,7 +494,7 @@
 
         const videoContainer = this.player.parentElement;
 
-        // Iframe channel (none currently, but supported)
+        // Iframe channel support (none currently used)
         if (channel.type === 'iframe') {
           this.player.style.display = 'none';
           const existingIframe = videoContainer.querySelector('iframe');
@@ -532,7 +511,7 @@
           return;
         }
 
-        // YouTube channel (if used)
+        // YouTube channel support (if used)
         if (channel.type === 'youtube') {
           this.player.style.display = 'none';
           const existingIframe = videoContainer.querySelector('iframe');
@@ -651,118 +630,12 @@
         this.loadingOverlay.classList.add('hidden');
         this.errorOverlay.classList.add('hidden');
       }
-
-      // ===== Mobile Fullscreen (native, mobile only) =====
-      async requestNativeFullscreen() {
-        if (window.innerWidth >= 768) return; // only mobile
-        const container = this.player.parentElement; // video wrapper
-        try {
-          if (container.requestFullscreen) await container.requestFullscreen();
-          else if (container.webkitRequestFullscreen) await container.webkitRequestFullscreen();
-          else if (container.msRequestFullscreen) await container.msRequestFullscreen();
-          this.onEnterNativeFullscreen();
-        } catch (e) {
-          console.warn('Fullscreen not available', e);
-        }
-      }
-
-      async exitNativeFullscreen() {
-        try {
-          if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-            if (document.exitFullscreen) await document.exitFullscreen();
-            else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
-            else if (document.msExitFullscreen) await document.msExitFullscreen();
-          }
-          this.onExitNativeFullscreen();
-        } catch (e) {
-          console.warn('Exit fullscreen failed', e);
-        }
-      }
-
-      onEnterNativeFullscreen() {
-        const ui = document.getElementById('mobileFsUI');
-        const clickCatcher = document.getElementById('mobileFsClickCatcher');
-        const exitBtn = document.getElementById('exitFsBtn');
-        const fsPrev = document.getElementById('fsPrev');
-        const fsNext = document.getElementById('fsNext');
-        const fsMute = document.getElementById('fsMute');
-        const mobileWatermark = document.getElementById('mobileWatermark');
-        if (mobileWatermark) mobileWatermark.classList.add('hidden');
-
-        // Show overlay UI on enter and populate channels
-        ui.classList.remove('hidden');
-        ui.classList.remove('hidden-ui');
-        this.populateFsChannelList();
-
-        // Hook buttons
-        fsPrev.onclick = () => { this.previousChannel(); this.resetMobileFsAutoHide(); };
-        fsNext.onclick = () => { this.nextChannel(); this.resetMobileFsAutoHide(); };
-        fsMute.onclick = () => { this.toggleMute(); this.resetMobileFsAutoHide(); };
-        exitBtn.onclick = () => this.exitNativeFullscreen();
-
-        // Auto-hide after 5s
-        this.resetMobileFsAutoHide();
-
-        // Tap to toggle UI
-        clickCatcher.onclick = () => {
-          if (ui.classList.contains('hidden-ui')) {
-            ui.classList.remove('hidden-ui');
-            this.resetMobileFsAutoHide();
-          } else {
-            ui.classList.add('hidden-ui');
-          }
-        };
-      }
-
-      onExitNativeFullscreen() {
-        const ui = document.getElementById('mobileFsUI');
-        ui.classList.add('hidden');
-        ui.classList.remove('hidden-ui');
-        const mobileWatermark = document.getElementById('mobileWatermark');
-        if (mobileWatermark) mobileWatermark.classList.remove('hidden');
-        this.clearMobileFsAutoHide();
-      }
-
-      populateFsChannelList() {
-        const list = document.getElementById('mobileFsChannelList');
-        if (!list) return;
-        if (!this.channels.length) {
-          list.innerHTML = '<div class="text-gray-400 text-xs">No channels</div>';
-          return;
-        }
-        list.innerHTML = this.channels.map((c, i) => `
-          <button data-i="${i}" class="w-full text-left px-2 py-1 rounded text-xs ${i === this.currentChannelIndex ? 'bg-blue-600 text-white' : 'hover:bg-gray-800 text-gray-200'} truncate">${i+1}. ${c.name}</button>
-        `).join('');
-        list.querySelectorAll('button').forEach(btn => {
-          btn.onclick = () => {
-            const idx = parseInt(btn.getAttribute('data-i'));
-            this.selectChannel(idx);
-            this.resetMobileFsAutoHide();
-          };
-        });
-      }
-
-      resetMobileFsAutoHide() {
-        const ui = document.getElementById('mobileFsUI');
-        ui.classList.remove('hidden-ui');
-        this.clearMobileFsAutoHide();
-        this._mobileFsTimer = setTimeout(() => {
-          ui.classList.add('hidden-ui');
-        }, 5000);
-      }
-
-      clearMobileFsAutoHide() {
-        if (this._mobileFsTimer) {
-          clearTimeout(this._mobileFsTimer);
-          this._mobileFsTimer = null;
-        }
-      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       new TVPlayer();
 
-      // Demo service worker (cache logo only)
+      // Demo service worker (cache logo only) - may not register due to CSP
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdvbmxpbmUtdHYtdjEnOwpjb25zdCB1cmxzVG9DYWNoZSA9IFsKICAnLycsIAogICcuL2xvZ28ucG5nJwpdOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpCiAgICAgIC50aGVuKGNhY2hlID0+IGNhY2hlLmFkZEFsbCh1cmxzVG9DYWNoZSkpCiAgKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZXZlbnQgPT4gewogIGV2ZW50LnJlc3BvbmRXaXRoKAogICAgY2FjaGVzLm1hdGNoKGV2ZW50LnJlcXVlc3QpCiAgICAgIC50aGVuKHJlc3BvbnNlID0+IHsKICAgICAgICBpZiAocmVzcG9uc2UpIHsKICAgICAgICAgIHJldHVybiByZXNwb25zZTsKICAgICAgICB9CiAgICAgICAgcmV0dXJuIGZldGNoKGV2ZW50LnJlcXVlc3QpOwogICAgICB9KQogICk7Cn0pOw==')
           .then(r => console.log('Service Worker registered', r))
@@ -770,5 +643,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821c2e8906fac70',t:'MTc1ODM3NTkwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821da377171aaf7',t:'MTc1ODM3Njg2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
