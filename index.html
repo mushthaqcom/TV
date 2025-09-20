@@ -47,6 +47,16 @@
     .channel-item.active { background-color: #3b82f6; }
     .sidebar-toggle { transition: transform 0.3s ease; }
     .sidebar-hidden { transform: translateX(-100%); }
+
+    /* Mobile fullscreen styles */
+    .mobile-fs-active { position: fixed !important; inset: 0; z-index: 60; background: #000; }
+    .mobile-fs-active #videoPlayer { transform: rotate(90deg); transform-origin: center center; width: 100vh !important; height: 100vw !important; }
+    .mobile-fs-ui { position: absolute; inset: 0; pointer-events: none; }
+    .mobile-fs-ui .panel, .mobile-fs-ui .controls, .mobile-fs-ui .topbar { pointer-events: auto; }
+    .mobile-fs-ui.hidden-ui .panel, .mobile-fs-ui.hidden-ui .controls { opacity: 0; pointer-events: none; }
+    .mobile-fs-ui .panel { transition: opacity 0.25s ease; }
+    .mobile-fs-ui .controls { transition: opacity 0.25s ease; }
+
     @media (max-width: 768px) {
       .sidebar { position: fixed; z-index: 50; height: 100vh; }
     }
@@ -176,15 +186,39 @@
           </button>
         </div>
 
-        <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 w-full max-w-xs justify-center">
-          <span>Mute</span>
-        </button>
+        <div class="w-full max-w-xs grid grid-cols-2 gap-3">
+          <button id="muteButtonMobile" class="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 justify-center">
+            <span>Mute</span>
+          </button>
+          <button id="fullscreenButtonMobile" class="bg-blue-700 hover:bg-blue-800 px-5 py-3 rounded-xl text-base font-semibold transition-colors flex items-center gap-2 justify-center">
+            <span>Fullscreen</span>
+          </button>
+        </div>
       </div>
     </main>
   </div>
 
   <!-- Mobile overlay for sidebar -->
   <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+  <!-- Mobile Fullscreen UI -->
+  <div id="mobileFsUI" class="mobile-fs-ui hidden md:hidden">
+    <div class="absolute inset-0" id="mobileFsClickCatcher"></div>
+    <!-- Left channel list panel -->
+    <div id="mobileFsPanel" class="panel absolute left-0 top-0 bottom-0 w-56 max-w-[70vw] bg-gray-900/95 border-r border-gray-800 overflow-y-auto p-3">
+      <h3 class="text-sm font-semibold text-blue-400 mb-2">Channels</h3>
+      <div id="mobileFsChannelList" class="space-y-2 pr-1"></div>
+      <div class="mt-3 grid grid-cols-3 gap-2">
+        <button id="fsPrev" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-xs">Prev</button>
+        <button id="fsMute" class="bg-red-600 hover:bg-red-700 px-3 py-2 rounded text-xs">Mute</button>
+        <button id="fsNext" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-xs">Next</button>
+      </div>
+    </div>
+    <!-- Top controls -->
+    <div class="controls absolute right-3 top-3 flex items-center gap-2">
+      <button id="exitFsBtn" class="bg-gray-800/80 hover:bg-gray-700 text-white text-xs px-3 py-2 rounded">Exit</button>
+    </div>
+  </div>
 
   <!-- Mobile watermark: hidden when menu opens -->
   <div id="mobileWatermark" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
@@ -269,6 +303,8 @@
         document.getElementById('prevChannelMobile').addEventListener('click', () => this.previousChannel());
         document.getElementById('nextChannelMobile').addEventListener('click', () => this.nextChannel());
         document.getElementById('muteButtonMobile').addEventListener('click', () => this.toggleMute());
+        const fsBtn = document.getElementById('fullscreenButtonMobile');
+        if (fsBtn) fsBtn.addEventListener('click', () => this.enterMobileFullscreen());
 
         document.getElementById('retryButton').addEventListener('click', () => this.playCurrentChannel());
 
@@ -306,6 +342,19 @@
         if (openBtn && modal) {
           openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
         }
+
+        // Keep fullscreen UI updated with channel changes
+        const onChannelChange = () => {
+          const ui = document.getElementById('mobileFsUI');
+          if (ui && !ui.classList.contains('hidden')) this.populateFsChannelList();
+        };
+        // Hook into next/prev to refresh list on change
+        const origNext = this.nextChannel.bind(this);
+        this.nextChannel = () => { origNext(); onChannelChange(); };
+        const origPrev = this.previousChannel.bind(this);
+        this.previousChannel = () => { origPrev(); onChannelChange(); };
+        const origSelect = this.selectChannel.bind(this);
+        this.selectChannel = (i) => { origSelect(i); onChannelChange(); };
         if (closeBtn && modal) {
           closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
         }
@@ -314,6 +363,16 @@
             if (e.target === modal) modal.classList.add('hidden');
           });
         }
+
+        // Exit fullscreen on rotate back to portrait
+        window.addEventListener('orientationchange', () => {
+          if (window.innerWidth < 768) {
+            const container = this.player.parentElement;
+            if (container.classList.contains('mobile-fs-active') && Math.abs(window.orientation) !== 90) {
+              this.exitMobileFullscreen();
+            }
+          }
+        });
 
         // Copy playlist button
         const copyBtn = document.getElementById('copyM3uBtn');
@@ -599,6 +658,93 @@
         this.loadingOverlay.classList.add('hidden');
         this.errorOverlay.classList.add('hidden');
       }
+
+      // ===== Mobile Fullscreen (mobile only) =====
+      enterMobileFullscreen() {
+        if (window.innerWidth >= 768) return; // only mobile
+        const container = this.player.parentElement; // video wrapper
+        container.classList.add('mobile-fs-active');
+
+        const ui = document.getElementById('mobileFsUI');
+        const panel = document.getElementById('mobileFsPanel');
+        const clickCatcher = document.getElementById('mobileFsClickCatcher');
+        const exitBtn = document.getElementById('exitFsBtn');
+        const fsPrev = document.getElementById('fsPrev');
+        const fsNext = document.getElementById('fsNext');
+        const fsMute = document.getElementById('fsMute');
+        const mobileWatermark = document.getElementById('mobileWatermark');
+        if (mobileWatermark) mobileWatermark.classList.add('hidden');
+
+        // Show UI
+        ui.classList.remove('hidden');
+        ui.classList.remove('hidden-ui');
+        this.populateFsChannelList();
+
+        // Hook buttons
+        fsPrev.onclick = () => this.previousChannel();
+        fsNext.onclick = () => this.nextChannel();
+        fsMute.onclick = () => this.toggleMute();
+        exitBtn.onclick = () => this.exitMobileFullscreen();
+
+        // Hide panel after 5s of inactivity
+        this.resetMobileFsAutoHide();
+
+        // Toggle panel visibility on tap
+        clickCatcher.onclick = () => {
+          if (ui.classList.contains('hidden-ui')) {
+            ui.classList.remove('hidden-ui');
+            this.resetMobileFsAutoHide();
+          } else {
+            ui.classList.add('hidden-ui');
+          }
+        };
+      }
+
+      exitMobileFullscreen() {
+        const container = this.player.parentElement;
+        container.classList.remove('mobile-fs-active');
+        const ui = document.getElementById('mobileFsUI');
+        ui.classList.add('hidden');
+        ui.classList.remove('hidden-ui');
+        const mobileWatermark = document.getElementById('mobileWatermark');
+        if (mobileWatermark) mobileWatermark.classList.remove('hidden');
+        this.clearMobileFsAutoHide();
+      }
+
+      populateFsChannelList() {
+        const list = document.getElementById('mobileFsChannelList');
+        if (!list) return;
+        if (!this.channels.length) {
+          list.innerHTML = '<div class="text-gray-400 text-xs">No channels</div>';
+          return;
+        }
+        list.innerHTML = this.channels.map((c, i) => `
+          <button data-i="${i}" class="w-full text-left px-2 py-1 rounded text-xs ${i === this.currentChannelIndex ? 'bg-blue-600 text-white' : 'hover:bg-gray-800 text-gray-200'} truncate">${i+1}. ${c.name}</button>
+        `).join('');
+        list.querySelectorAll('button').forEach(btn => {
+          btn.onclick = () => {
+            const idx = parseInt(btn.getAttribute('data-i'));
+            this.selectChannel(idx);
+            this.resetMobileFsAutoHide();
+          };
+        });
+      }
+
+      resetMobileFsAutoHide() {
+        const ui = document.getElementById('mobileFsUI');
+        ui.classList.remove('hidden-ui');
+        this.clearMobileFsAutoHide();
+        this._mobileFsTimer = setTimeout(() => {
+          ui.classList.add('hidden-ui');
+        }, 5000);
+      }
+
+      clearMobileFsAutoHide() {
+        if (this._mobileFsTimer) {
+          clearTimeout(this._mobileFsTimer);
+          this._mobileFsTimer = null;
+        }
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -612,5 +758,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9820d0bf23f7ab3c',t:'MTc1ODM2NTk4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821bb483233ac70',t:'MTc1ODM3NTU5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
