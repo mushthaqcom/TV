@@ -329,22 +329,58 @@
         this.player.addEventListener('canplay', () => this.hideOverlays());
         this.player.addEventListener('error', () => this.showError());
 
-        // Keyboard shortcuts
+        // Keyboard + TV remote shortcuts
         document.addEventListener('keydown', (e) => {
-          switch (e.key) {
+          const key = e.key || e.code;
+          switch (key) {
+            // D-pad up + Channel Up should go to previous channel
             case 'ArrowUp':
+            case 'ChannelUp':
+            case 'PageUp':
               e.preventDefault();
               this.previousChannel();
-              break;
+              return;
+
+            // D-pad down + Channel Down should go to next channel
             case 'ArrowDown':
+            case 'ChannelDown':
+            case 'PageDown':
               e.preventDefault();
               this.nextChannel();
-              break;
+              return;
+
+            // OK/Enter/Select should toggle mute
+            case 'Enter':
+            case 'OK':
+            case 'Select':
+              e.preventDefault();
+              this.toggleMute();
+              return;
+
+            // Keyboard fallback for mute
             case 'm':
             case 'M':
               e.preventDefault();
               this.toggleMute();
-              break;
+              return;
+
+            default:
+              // Vendor-specific keyCodes for some TVs
+              if (e.keyCode === 427) { // Channel Up
+                e.preventDefault();
+                this.previousChannel();
+                return;
+              }
+              if (e.keyCode === 428) { // Channel Down
+                e.preventDefault();
+                this.nextChannel();
+                return;
+              }
+              if (e.keyCode === 13) { // Enter/OK
+                e.preventDefault();
+                this.toggleMute();
+                return;
+              }
           }
         });
 
@@ -684,5 +720,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98320a20e37baba5',t:'MTc1ODU0NjU5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98322245834236a6',t:'MTc1ODU0NzU4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
