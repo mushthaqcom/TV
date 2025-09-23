@@ -720,5 +720,99 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98322245834236a6',t:'MTc1ODU0NzU4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  
+  <!-- Desktop Navigation Guide (shows once per session on desktop) -->
+  <div id="desktopGuide" class="hidden fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm items-center justify-center p-4 md:flex">
+    <div class="w-full max-w-xl bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
+      <div class="px-6 py-5 border-b border-gray-800">
+        <h3 class="text-lg font-semibold text-white">Quick controls — keyboard & TV remote</h3>
+      </div>
+
+      <div class="px-6 py-6 space-y-6">
+        <!-- Arrows visual -->
+        <div class="flex items-center justify-center gap-6">
+          <div class="flex items-center gap-4">
+            <!-- Up Arrow -->
+            <div class="relative">
+              <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-[var(--brand1)] to-[var(--brand2)] shadow-[0_10px_30px_-10px_rgba(103,51,246,0.6)] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
+                </svg>
+              </div>
+              <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[11px] text-gray-300">Up</div>
+            </div>
+
+            <div class="text-gray-500 text-sm font-medium select-none">or</div>
+
+            <!-- Down Arrow -->
+            <div class="relative">
+              <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-[var(--brand2)] to-[var(--brand1)] shadow-[0_10px_30px_-10px_rgba(251,66,153,0.6)] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white animate-bounce [animation-direction:reverse]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0l-6-6m6 6l6-6" />
+                </svg>
+              </div>
+              <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[11px] text-gray-300">Down</div>
+            </div>
+          </div>
+        </div>
+        <p class="text-center text-gray-200 text-sm">Use Up/Down (or Channel Up/Down) to switch channels</p>
+
+        <div class="flex items-center justify-center">
+          <!-- OK/Enter keycap visual -->
+          <div class="flex items-center gap-4">
+            <div class="px-5 py-2 rounded-xl border border-white/20 bg-white/5 text-white font-semibold tracking-wide shadow-inner">OK</div>
+            <span class="text-gray-500 text-sm">or</span>
+            <div class="px-5 py-2 rounded-xl border border-white/20 bg-white/5 text-white font-semibold tracking-wide shadow-inner">Enter</div>
+          </div>
+        </div>
+        <p class="text-center text-gray-200 text-sm">Press OK/Enter to mute or unmute</p>
+
+        <p class="text-center text-gray-400 text-xs">Press any key or click anywhere to dismiss</p>
+      </div>
+
+      <div class="px-6 py-4 border-t border-gray-800 flex justify-end">
+        <button class="dismissGuide bg-gradient-to-r from-[var(--brand1)] to-[var(--brand2)] hover:opacity-90 px-4 py-2 rounded-md text-white">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Show desktop guide once per session and hide on any key or click
+    (function(){
+      const showGuideIfNeeded = () => {
+        const isDesktop = window.innerWidth >= 768; // match md breakpoint
+        const alreadyShown = sessionStorage.getItem('desktopGuideShown') === '1';
+        const guide = document.getElementById('desktopGuide');
+        if (!guide) return;
+        if (isDesktop && !alreadyShown) {
+          guide.classList.remove('hidden');
+
+          const dismiss = () => {
+            guide.classList.add('hidden');
+            sessionStorage.setItem('desktopGuideShown','1');
+            window.removeEventListener('keydown', onAnyKey, true);
+          };
+
+          const onAnyKey = () => dismiss();
+
+          // Close on any key press
+          window.addEventListener('keydown', onAnyKey, true);
+          // Close when overlay or button is clicked
+          guide.addEventListener('click', (e) => {
+            // allow clicking outside card or on button to dismiss
+            if (e.target.id === 'desktopGuide' || e.target.classList.contains('dismissGuide')) {
+              dismiss();
+            }
+          });
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', showGuideIfNeeded);
+      } else {
+        showGuideIfNeeded();
+      }
+    })();
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'983a1846642eac9f',t:'MTc1ODYzMTA2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
