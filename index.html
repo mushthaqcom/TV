@@ -52,10 +52,8 @@
       background: linear-gradient(90deg, var(--brand1), var(--brand2));
       color: #fff;
     }
-    .sidebar-toggle { transition: transform 0.3s ease; }
-    .sidebar-hidden { transform: translateX(-100%); }
-    @media (max-width: 768px) {
-      .sidebar { position: fixed; z-index: 50; height: 100vh; }
+    body {
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -63,11 +61,6 @@
   <!-- Header -->
   <header class="bg-gray-800 p-4 flex items-center justify-between">
     <div class="flex items-center space-x-4">
-      <button id="sidebarToggle" class="md:hidden text-white hover:text-[var(--brand2)]" aria-label="Toggle channels">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
       <div class="flex items-center space-x-3">
         <img src="./logo.png" alt="M-TV LIVE Logo" class="w-8 h-8" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
         <span class="text-2xl" style="display:none;">📺</span>
@@ -82,9 +75,10 @@
     </div>
   </header>
 
-  <div class="flex w-full overflow-x-hidden" style="height: calc(100vh - 4rem);">
+  <!-- Desktop Layout -->
+  <div class="hidden md:flex w-full overflow-x-hidden" style="height: calc(100vh - 4rem);">
     <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar sidebar-toggle sidebar-hidden bg-gray-800 w-80 border-r border-gray-700 md:translate-x-0 flex flex-col">
+    <aside id="sidebar" class="sidebar bg-gray-800 w-80 border-r border-gray-700 flex flex-col">
       <div class="p-4 flex-shrink-0">
         <h2 class="text-lg font-semibold mb-4">
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand1)] to-[var(--brand2)]">📋 Channels</span>
@@ -99,7 +93,7 @@
       </div>
 
       <!-- Desktop Controls -->
-      <div class="bg-gray-700/60 backdrop-blur-xl p-4 flex-shrink-0 hidden md:block">
+      <div class="bg-gray-700/60 backdrop-blur-xl p-4 flex-shrink-0">
         <div class="space-y-3">
           <div class="flex space-x-2">
             <button id="prevChannel" class="relative bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-[0_10px_30px_-10px_rgba(103,51,246,0.6)] ring-1 ring-[color:rgba(251,66,153,0.25)] px-4 py-3 rounded-xl text-sm font-semibold transition-all flex-1 flex items-center justify-center gap-2">
@@ -108,7 +102,7 @@
               </svg>
               <span>Previous</span>
             </button>
-            <button id="nextChannel" class="relative bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-[0_10px_30px_-10px_rgba(251,66,153,0.6)] ring-1 ring-[color:rgba(103,51,246,0.25)] px-4 py-3 rounded-xl text-sm font-semibold transition-all flex-1 flex items-center justify-center gap-2">
+            <button id="nextChannel" class="relative bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-[0_10px_30px_-10px_rgba(251,66,153,0.6)] ring-1 ring-[color:rgba(251,66,153,0.25)] px-4 py-3 rounded-xl text-sm font-semibold transition-all flex-1 flex items-center justify-center gap-2">
               <span>Next</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
@@ -141,7 +135,7 @@
     <!-- Main -->
     <main class="flex-1 flex flex-col">
       <!-- Player -->
-      <div class="bg-black relative flex-1 md:h-full" style="height: calc(100vh - 8rem);">
+      <div class="bg-black relative flex-1" style="height: calc(100vh - 4rem);">
         <video
           id="videoPlayer"
           class="w-full h-full object-contain"
@@ -171,38 +165,77 @@
           </div>
         </div>
       </div>
+    </main>
+  </div>
 
-      <!-- Mobile Controls -->
-      <div class="bg-gray-800/60 backdrop-blur-xl p-4 flex md:hidden flex-col items-center justify-center gap-3 order-first w-full overflow-x-hidden">
-        <div class="w-full flex items-center justify-center gap-3 overflow-x-hidden">
-          <button id="prevChannelMobile" class="relative bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-[0_10px_30px_-10px_rgba(103,51,246,0.6)] ring-1 ring-[color:rgba(251,66,153,0.25)] px-4 py-3 rounded-2xl text-base font-semibold transition-all flex items-center gap-2 whitespace-nowrap text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7M20 19l-7-7 7-7" />
-            </svg>
-            <span>Previous</span>
-          </button>
+  <!-- Mobile Layout -->
+  <div class="md:hidden flex flex-col" style="height: calc(100vh - 4rem);">
+    <!-- Mobile Player -->
+    <div class="bg-black relative" style="height: 40vh;">
+      <video
+        id="videoPlayerMobile"
+        class="w-full h-full object-contain"
+        autoplay
+        playsinline
+        webkit-playsinline
+        controls
+        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23111827'/%3E%3Ctext x='200' y='150' text-anchor='middle' fill='%236b7280' font-family='Arial' font-size='18'%3ESelect a channel%3C/text%3E%3C/svg%3E">
+        Your browser does not support the video tag.
+      </video>
 
-          <button id="nextChannelMobile" class="relative bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-[0_10px_30px_-10px_rgba(251,66,153,0.6)] ring-1 ring-[color:rgba(103,51,246,0.25)] px-4 py-3 rounded-2xl text-base font-semibold transition-all flex items-center gap-2 whitespace-nowrap text-white">
-            <span>Next</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M4 5l7 7-7 7" />
-            </svg>
+      <!-- Mobile Loading -->
+      <div id="loadingOverlayMobile" class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="text-center">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--brand1)] mx-auto mb-2"></div>
+          <p class="text-white text-sm">Loading...</p>
+        </div>
+      </div>
+
+      <!-- Mobile Error -->
+      <div id="errorOverlayMobile" class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="text-center p-4">
+          <div class="text-[var(--brand2)] text-4xl mb-2">⚠️</div>
+          <p class="text-white text-sm mb-3">Unable to load channel</p>
+          <button id="retryButtonMobile" class="bg-gradient-to-r from-[var(--brand1)] to-[var(--brand2)] hover:opacity-90 px-4 py-2 rounded-lg text-white text-sm transition">
+            Try Again
           </button>
         </div>
-
-        <!-- Hidden on mobile by request -->
-        <button id="muteButtonMobile" class="hidden bg-white/10 hover:bg-white/15 active:bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg px-5 py-3 rounded-2xl text-base font-semibold transition-all flex items-center gap-2 w-full max-w-xs justify-center text-white" aria-hidden="true" tabindex="-1">
-          <span>Mute</span>
-        </button>
       </div>
-    </main>
+    </div>
+
+    <!-- Mobile Channel List -->
+    <div class="flex-1 bg-gray-900 overflow-y-auto">
+      <div class="p-4">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand1)] to-[var(--brand2)]">📺 Channels</span>
+          <span id="currentChannelMobile" class="text-sm text-gray-400 font-normal"></span>
+        </h2>
+        
+        <div id="channelListMobile" class="space-y-2">
+          <div class="text-center py-8 text-gray-400">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--brand1)] mx-auto mb-2"></div>
+            Loading channels...
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Footer -->
+      <div class="p-4 border-t border-gray-700 bg-gray-800/50">
+        <div class="flex items-center justify-between text-xs text-gray-400">
+          <span>Powered by <a href="https://mushthaq.com" target="_blank" rel="noopener noreferrer" class="text-[var(--brand1)] hover:text-[var(--brand2)]">Mushthaq.com</a></span>
+          <button id="openInstructionsMobile" class="text-[var(--brand1)] hover:text-[var(--brand2)] underline">
+            How to watch on TV
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Mobile overlay for sidebar -->
   <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
 
   <!-- Mobile watermark: hidden when menu opens -->
-  <div id="mobileWatermark" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
+  <div id="mobileWatermark" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden hidden">
     <p class="text-xs text-gray-300 bg-black/60 px-3 py-1 rounded-full">
       Powered by <a href="https://mushthaq.com" target="_blank" rel="noopener noreferrer" class="text-[var(--brand1)] hover:text-[var(--brand2)]">Mushthaq.com</a>
     </p>
@@ -252,7 +285,7 @@
     <div class="absolute inset-0 flex items-center justify-center p-4">
       <div class="w-full max-w-md bg-gray-900 border border-gray-700 rounded-xl shadow-xl overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-800">
-          <h3 class="text-base font-semibold text-white">What’s new — v2.6</h3>
+          <h3 class="text-base font-semibold text-white">What's new — v2.6</h3>
           <button id="closeChangelog" class="text-gray-300 hover:text-white" aria-label="Close changelog">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -279,37 +312,34 @@
         this.channels = [];
         this.currentChannelIndex = 0;
         this.player = document.getElementById('videoPlayer');
+        this.playerMobile = document.getElementById('videoPlayerMobile');
         this.channelList = document.getElementById('channelList');
+        this.channelListMobile = document.getElementById('channelListMobile');
         this.currentChannelDisplay = document.getElementById('currentChannel');
+        this.currentChannelMobile = document.getElementById('currentChannelMobile');
         this.loadingOverlay = document.getElementById('loadingOverlay');
+        this.loadingOverlayMobile = document.getElementById('loadingOverlayMobile');
         this.errorOverlay = document.getElementById('errorOverlay');
-        this.sidebar = document.getElementById('sidebar');
-        this.mobileOverlay = document.getElementById('mobileOverlay');
-        this.mobileWatermark = document.getElementById('mobileWatermark');
+        this.errorOverlayMobile = document.getElementById('errorOverlayMobile');
         this.hls = null;
+        this.hlsMobile = null;
 
         this.initializeEventListeners();
         this.loadPlaylist();
 
-        // Let the device manage native controls visibility (mobile only)
-        this.setNativeControlsForViewport(false);
-        window.addEventListener('resize', () => this.setNativeControlsForViewport(false));
-        window.addEventListener('orientationchange', () => this.setNativeControlsForViewport(false));
+        // Set native controls for mobile only
+        this.setNativeControlsForViewport();
+        window.addEventListener('resize', () => this.setNativeControlsForViewport());
+        window.addEventListener('orientationchange', () => this.setNativeControlsForViewport());
       }
 
       setNativeControlsForViewport() {
         const isMobile = window.innerWidth < 768;
-        this.player.controls = isMobile;
-        if (!isMobile) this.player.removeAttribute('controls');
+        if (this.player) this.player.controls = false;
+        if (this.playerMobile) this.playerMobile.controls = true;
       }
 
       initializeEventListeners() {
-        // Sidebar toggle (mobile)
-        document.getElementById('sidebarToggle').addEventListener('click', () => {
-          this.toggleSidebar();
-        });
-        this.mobileOverlay.addEventListener('click', () => this.closeSidebar());
-
         // Navigation
         document.getElementById('prevChannel')?.addEventListener('click', () => this.previousChannel());
         document.getElementById('nextChannel')?.addEventListener('click', () => this.nextChannel());
@@ -317,23 +347,26 @@
         // Desktop mute
         document.getElementById('muteButton')?.addEventListener('click', () => this.toggleMute());
 
-        // Mobile controls
-        document.getElementById('prevChannelMobile')?.addEventListener('click', () => this.previousChannel());
-        document.getElementById('nextChannelMobile')?.addEventListener('click', () => this.nextChannel());
-        document.getElementById('muteButtonMobile')?.addEventListener('click', () => this.toggleMute());
-
         document.getElementById('retryButton')?.addEventListener('click', () => this.playCurrentChannel());
+        document.getElementById('retryButtonMobile')?.addEventListener('click', () => this.playCurrentChannel());
 
         // Video events
-        this.player.addEventListener('loadstart', () => this.showLoading());
-        this.player.addEventListener('canplay', () => this.hideOverlays());
-        this.player.addEventListener('error', () => this.showError());
+        if (this.player) {
+          this.player.addEventListener('loadstart', () => this.showLoading());
+          this.player.addEventListener('canplay', () => this.hideOverlays());
+          this.player.addEventListener('error', () => this.showError());
+        }
+
+        if (this.playerMobile) {
+          this.playerMobile.addEventListener('loadstart', () => this.showLoadingMobile());
+          this.playerMobile.addEventListener('canplay', () => this.hideOverlaysMobile());
+          this.playerMobile.addEventListener('error', () => this.showErrorMobile());
+        }
 
         // Keyboard + TV remote shortcuts
         document.addEventListener('keydown', (e) => {
           const key = e.key || e.code;
           switch (key) {
-            // D-pad up + Channel Up should go to previous channel
             case 'ArrowUp':
             case 'ChannelUp':
             case 'PageUp':
@@ -341,7 +374,6 @@
               this.previousChannel();
               return;
 
-            // D-pad down + Channel Down should go to next channel
             case 'ArrowDown':
             case 'ChannelDown':
             case 'PageDown':
@@ -349,7 +381,6 @@
               this.nextChannel();
               return;
 
-            // OK/Enter/Select should toggle mute
             case 'Enter':
             case 'OK':
             case 'Select':
@@ -357,7 +388,6 @@
               this.toggleMute();
               return;
 
-            // Keyboard fallback for mute
             case 'm':
             case 'M':
               e.preventDefault();
@@ -365,18 +395,17 @@
               return;
 
             default:
-              // Vendor-specific keyCodes for some TVs
-              if (e.keyCode === 427) { // Channel Up
+              if (e.keyCode === 427) {
                 e.preventDefault();
                 this.previousChannel();
                 return;
               }
-              if (e.keyCode === 428) { // Channel Down
+              if (e.keyCode === 428) {
                 e.preventDefault();
                 this.nextChannel();
                 return;
               }
-              if (e.keyCode === 13) { // Enter/OK
+              if (e.keyCode === 13) {
                 e.preventDefault();
                 this.toggleMute();
                 return;
@@ -389,10 +418,15 @@
 
         // Open/close instructions modal
         const openBtn = document.getElementById('openInstructions');
+        const openBtnMobile = document.getElementById('openInstructionsMobile');
         const modal = document.getElementById('instructionsModal');
         const closeBtn = document.getElementById('closeInstructions');
+        
         if (openBtn && modal) {
           openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+        }
+        if (openBtnMobile && modal) {
+          openBtnMobile.addEventListener('click', () => modal.classList.remove('hidden'));
         }
         if (closeBtn && modal) {
           closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
@@ -454,7 +488,7 @@
           }
         } catch (error) {
           console.error('Error loading playlist:', error);
-          this.channelList.innerHTML = `
+          const errorHTML = `
             <div class="text-center py-8 text-red-400">
               <div class="text-4xl mb-2">❌</div>
               <p>Failed to load channels</p>
@@ -463,6 +497,8 @@
               </button>
             </div>
           `;
+          if (this.channelList) this.channelList.innerHTML = errorHTML;
+          if (this.channelListMobile) this.channelListMobile.innerHTML = errorHTML;
         }
       }
 
@@ -495,16 +531,18 @@
 
       renderChannelList() {
         if (this.channels.length === 0) {
-          this.channelList.innerHTML = `
+          const noChannelsHTML = `
             <div class="text-center py-8 text-gray-400">
               <div class="text-4xl mb-2">📺</div>
               <p>No channels found</p>
             </div>
           `;
+          if (this.channelList) this.channelList.innerHTML = noChannelsHTML;
+          if (this.channelListMobile) this.channelListMobile.innerHTML = noChannelsHTML;
           return;
         }
 
-        this.channelList.innerHTML = this.channels.map((channel, index) => `
+        const channelsHTML = this.channels.map((channel, index) => `
           <div class="channel-item p-3 rounded-lg cursor-pointer transition-colors ${index === this.currentChannelIndex ? 'active' : ''}" data-index="${index}">
             <div class="flex items-center space-x-3">
               ${channel.logo
@@ -519,11 +557,14 @@
           </div>
         `).join('');
 
-        this.channelList.querySelectorAll('.channel-item').forEach(item => {
+        if (this.channelList) this.channelList.innerHTML = channelsHTML;
+        if (this.channelListMobile) this.channelListMobile.innerHTML = channelsHTML;
+
+        // Add click listeners
+        document.querySelectorAll('.channel-item').forEach(item => {
           item.addEventListener('click', () => {
             const i = parseInt(item.dataset.index);
             this.selectChannel(i);
-            this.closeSidebar();
           });
         });
       }
@@ -537,7 +578,7 @@
       }
 
       updateActiveChannel() {
-        const items = this.channelList.querySelectorAll('.channel-item');
+        const items = document.querySelectorAll('.channel-item');
         items.forEach((item, idx) => {
           item.classList.toggle('active', idx === this.currentChannelIndex);
         });
@@ -550,10 +591,12 @@
 
         if (this.channels[this.currentChannelIndex]) {
           const channel = this.channels[this.currentChannelIndex];
-          this.currentChannelDisplay.innerHTML = `
+          const channelHTML = `
             ${channel.logo ? `<img src="${channel.logo}" alt="${channel.name}" class="w-6 h-6 rounded object-cover" onerror="this.style.display='none';">` : ''}
             <span>${channel.name}</span>
           `;
+          if (this.currentChannelDisplay) this.currentChannelDisplay.innerHTML = channelHTML;
+          if (this.currentChannelMobile) this.currentChannelMobile.textContent = `— ${channel.name}`;
         }
       }
 
@@ -568,29 +611,25 @@
           this.hls.destroy();
           this.hls = null;
         }
-
-        const videoContainer = this.player.parentElement;
-
-        // Iframe channel support (none currently used)
-        if (channel.type === 'iframe') {
-          this.player.style.display = 'none';
-          const existingIframe = videoContainer.querySelector('iframe');
-          if (existingIframe) existingIframe.remove();
-
-          const iframe = document.createElement('iframe');
-          iframe.src = channel.url;
-          iframe.className = 'w-full h-full';
-          iframe.style.border = 'none';
-          iframe.allow = 'autoplay; fullscreen';
-          iframe.allowFullscreen = true;
-          videoContainer.appendChild(iframe);
-          this.hideOverlays();
-          return;
+        if (this.hlsMobile) {
+          this.hlsMobile.destroy();
+          this.hlsMobile = null;
         }
 
-        // YouTube channel support (if used)
-        if (channel.type === 'youtube') {
-          this.player.style.display = 'none';
+        // Play on both players
+        this.playOnPlayer(this.player, 'desktop');
+        this.playOnPlayer(this.playerMobile, 'mobile');
+      }
+
+      playOnPlayer(player, type) {
+        if (!player) return;
+
+        const channel = this.channels[this.currentChannelIndex];
+        const videoContainer = player.parentElement;
+
+        // Handle iframe channels (none currently used)
+        if (channel.type === 'iframe' || channel.type === 'youtube') {
+          player.style.display = 'none';
           const existingIframe = videoContainer.querySelector('iframe');
           if (existingIframe) existingIframe.remove();
 
@@ -602,37 +641,46 @@
           iframe.allowFullscreen = true;
           iframe.sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms';
           videoContainer.appendChild(iframe);
-          this.hideOverlays();
+          
+          if (type === 'desktop') this.hideOverlays();
+          else this.hideOverlaysMobile();
           return;
         }
 
         // Regular/HLS video
-        this.player.style.display = 'block';
+        player.style.display = 'block';
         const existingIframe = videoContainer.querySelector('iframe');
         if (existingIframe) existingIframe.remove();
 
         if (channel.url.includes('.m3u8')) {
           if (Hls.isSupported()) {
-            this.hls = new Hls({ enableWorker: true, lowLatencyMode: true, backBufferLength: 90 });
-            this.hls.loadSource(channel.url);
-            this.hls.attachMedia(this.player);
-            this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
-              this.player.play().catch(() => {});
+            const hls = new Hls({ enableWorker: true, lowLatencyMode: true, backBufferLength: 90 });
+            if (type === 'desktop') this.hls = hls;
+            else this.hlsMobile = hls;
+            
+            hls.loadSource(channel.url);
+            hls.attachMedia(player);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              player.play().catch(() => {});
             });
-            this.hls.on(Hls.Events.ERROR, (_event, data) => {
-              if (data.fatal) this.showError();
+            hls.on(Hls.Events.ERROR, (_event, data) => {
+              if (data.fatal) {
+                if (type === 'desktop') this.showError();
+                else this.showErrorMobile();
+              }
             });
-          } else if (this.player.canPlayType('application/vnd.apple.mpegurl')) {
-            this.player.src = channel.url;
-            this.player.load();
-            this.player.play().catch(() => {});
+          } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+            player.src = channel.url;
+            player.load();
+            player.play().catch(() => {});
           } else {
-            this.showError();
+            if (type === 'desktop') this.showError();
+            else this.showErrorMobile();
           }
         } else {
-          this.player.src = channel.url;
-          this.player.load();
-          this.player.play().catch(() => {});
+          player.src = channel.url;
+          player.load();
+          player.play().catch(() => {});
         }
       }
 
@@ -649,22 +697,22 @@
       }
 
       toggleMute() {
-        this.player.muted = !this.player.muted;
+        if (this.player) this.player.muted = !this.player.muted;
+        if (this.playerMobile) this.playerMobile.muted = this.player ? this.player.muted : !this.playerMobile.muted;
         this.updateMuteButtonsUI();
       }
 
       updateMuteButtonsUI() {
-        const isMuted = this.player.muted;
+        const isMuted = this.player ? this.player.muted : (this.playerMobile ? this.playerMobile.muted : false);
         const desktopBtn = document.getElementById('muteButton');
-        const mobileBtn = document.getElementById('muteButtonMobile');
 
         const unmutedIcon = `
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5l-4 4H5v6h2l4 4V5z" />
           </svg>
         `;
         const mutedIcon = `
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5l-4 4H5v6h2l4 4V5z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-6 6M19 15l-6-6" />
           </svg>
@@ -672,40 +720,36 @@
         const label = isMuted ? 'Unmute' : 'Mute';
 
         if (desktopBtn) desktopBtn.innerHTML = `${isMuted ? mutedIcon : unmutedIcon}<span class="ml-2">${label}</span>`;
-        if (mobileBtn) mobileBtn.innerHTML = `${isMuted ? mutedIcon : unmutedIcon}<span class="ml-2">${label}</span>`;
-      }
-
-      toggleSidebar() {
-        this.sidebar.classList.toggle('sidebar-hidden');
-        this.mobileOverlay.classList.toggle('hidden');
-
-        // Hide mobile watermark when menu is open
-        if (this.mobileWatermark) {
-          const isOpen = !this.sidebar.classList.contains('sidebar-hidden');
-          this.mobileWatermark.classList.toggle('hidden', isOpen);
-        }
-      }
-
-      closeSidebar() {
-        this.sidebar.classList.add('sidebar-hidden');
-        this.mobileOverlay.classList.add('hidden');
-        // Show mobile watermark again
-        if (this.mobileWatermark) this.mobileWatermark.classList.remove('hidden');
       }
 
       showLoading() {
-        this.loadingOverlay.classList.remove('hidden');
-        this.errorOverlay.classList.add('hidden');
+        if (this.loadingOverlay) this.loadingOverlay.classList.remove('hidden');
+        if (this.errorOverlay) this.errorOverlay.classList.add('hidden');
       }
 
       showError() {
-        this.loadingOverlay.classList.add('hidden');
-        this.errorOverlay.classList.remove('hidden');
+        if (this.loadingOverlay) this.loadingOverlay.classList.add('hidden');
+        if (this.errorOverlay) this.errorOverlay.classList.remove('hidden');
       }
 
       hideOverlays() {
-        this.loadingOverlay.classList.add('hidden');
-        this.errorOverlay.classList.add('hidden');
+        if (this.loadingOverlay) this.loadingOverlay.classList.add('hidden');
+        if (this.errorOverlay) this.errorOverlay.classList.add('hidden');
+      }
+
+      showLoadingMobile() {
+        if (this.loadingOverlayMobile) this.loadingOverlayMobile.classList.remove('hidden');
+        if (this.errorOverlayMobile) this.errorOverlayMobile.classList.add('hidden');
+      }
+
+      showErrorMobile() {
+        if (this.loadingOverlayMobile) this.loadingOverlayMobile.classList.add('hidden');
+        if (this.errorOverlayMobile) this.errorOverlayMobile.classList.remove('hidden');
+      }
+
+      hideOverlaysMobile() {
+        if (this.loadingOverlayMobile) this.loadingOverlayMobile.classList.add('hidden');
+        if (this.errorOverlayMobile) this.errorOverlayMobile.classList.add('hidden');
       }
     }
 
@@ -720,51 +764,5 @@
       }
     });
   </script>
-  
-
-  <script>
-    // Show desktop guide once per session and hide on any key or click
-    (function(){
-      const showGuideIfNeeded = () => {
-        const isDesktop = window.innerWidth >= 768; // match md breakpoint
-        const alreadyShown = sessionStorage.getItem('desktopGuideShown') === '1';
-        const guide = document.getElementById('desktopGuide');
-        if (!guide) return;
-        if (isDesktop && !alreadyShown) {
-          guide.classList.remove('hidden');
-
-          const dismiss = () => {
-            guide.classList.add('hidden');
-            sessionStorage.setItem('desktopGuideShown','1');
-            window.removeEventListener('keydown', onAnyKey, true);
-            window.removeEventListener('click', onAnyClick, true);
-          };
-
-          const onAnyKey = () => dismiss();
-          const onAnyClick = () => dismiss();
-
-          // Close on any key press or any click anywhere
-          window.addEventListener('keydown', onAnyKey, true);
-          window.addEventListener('click', onAnyClick, true);
-
-          // Also wire the explicit button as a fallback
-          const dismissBtn = document.getElementById('dismissGuideBtn');
-          if (dismissBtn) {
-            dismissBtn.addEventListener('click', (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              dismiss();
-            }, { once: true });
-          }
-        }
-      };
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', showGuideIfNeeded);
-      } else {
-        showGuideIfNeeded();
-      }
-    })();
-  </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'983a20c7e5efac9f',t:'MTc1ODYzMTQxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b4b6564c9ab2e',t:'MTc1ODgxMTQxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
