@@ -266,7 +266,7 @@
           <div>
             <label for="m3uLinkInput" class="block text-xs text-gray-400 mb-1">Playlist URL</label>
             <div class="flex items-stretch gap-2">
-              <input id="m3uLinkInput" type="text" class="flex-1 rounded-md bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--brand1)] focus:border-[var(--brand1)]" readonly value="https://raw.githubusercontent.com/mushthaqcom/tv/refs/heads/main/tv.m3u" aria-label="M3U playlist URL">
+              <input id="m3uLinkInput" type="text" class="flex-1 rounded-md bg-gray-800 border border-gray-700 px-3 py-2 text-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--brand1)] focus:border-[var(--brand1)]" readonly value="./tv.m3u" aria-label="M3U playlist URL">
               <button id="copyM3uBtn" class="shrink-0 inline-flex items-center gap-2 bg-gradient-to-r from-[var(--brand1)] to-[var(--brand2)] hover:opacity-90 text-white text-sm font-semibold px-3 py-2 rounded-md transition-colors" aria-label="Copy playlist URL">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2M8 16h8a2 2 0 002-2v-2M8 16v2a2 2 0 002 2h2m-2-6h6" />
@@ -482,7 +482,7 @@
 
       async loadPlaylist() {
         try {
-          const response = await fetch('https://raw.githubusercontent.com/mushthaqcom/tv/refs/heads/main/tv.m3u');
+          const response = await fetch('./tv.m3u');
           const playlistText = await response.text();
           this.parseM3U(playlistText);
           this.renderChannelList();
@@ -767,5 +767,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b53c23042ab2e',t:'MTc1ODgxMTc1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b5fe326593773',t:'MTc1ODgxMjI1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
