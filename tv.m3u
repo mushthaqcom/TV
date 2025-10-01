@@ -27,6 +27,8 @@ https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8
 https://stream.castr.com/68c8fc4d9d14bb40a50c535c/live_6ce1bf5092c211f09f3aa71b3f91a397/tracks-v1/index.fmp4.m3u8
 #EXTINF:-1 tvg-id="ceyflix" tvg-logo="https://i.imgur.com/8PACefT.png" group-title="Australia" ,CeyFLiX
 https://fastchannel.mdc.akamaized.net/live_df95d60098b711ee84ce95aebe582ac2/playlist.m3u8
+#EXTINF:-1 tvg-id="finn" tvg-logo="https://i.imgur.com/791BrOI.png" group-title="USA" ,FINN TV
+https://249063.global.ssl.fastly.net/68c30e9150bf7e9693d0cfa6/live_733146b095af11f0aa01bd7f7bc24713/index.m3u8
 #EXTINF:-1 tvg-id="SooriyanTV.ca" tvg-logo="https://i.imgur.com/iodI9Vo.png" group-title="Canada",Sooriyan TV
 https://cdn.jwplayer.com/videos/1m0nMXhZ-3SDdwqdV.m3u8
 #EXTINF:-1 tvg-id="SirippoliTV.in@SD" tvg-logo="https://i.imgur.com/iVQtmWY.png" group-title="India",Sirippoli TV
@@ -41,4 +43,5 @@ https://livestream10.sunnxt.com/DolbyVision/SunTV_HDR/SunTV_HDR_Endpoints/SunTV-
 https://fl3.moveonjoy.com/WILLOW_CRICKET/index.m3u8
 #EXTINF:-1 tvg-id="wilowsports" tvg-logo="https://i.imgur.com/v7nSm7M.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+
 
