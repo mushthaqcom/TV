@@ -1,5 +1,5 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="itn" tvg-logo="https://i.imgur.com/TlYtvgY.png" group-title="Sri Lanka",ITN
+#EXTINF:-1 tvg-id="itn" tvg-logo="https://i.imgur.com/ss86Lue.png" group-title="Sri Lanka",ITN
 https://edge4-moblive.yuppcdn.net/transsd/smil:itn43.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="channeleye" tvg-logo="https://i.imgur.com/MJWqPVy.png" group-title="Sri Lanka",Channel Eye
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:nettv15.smil/playlist.m3u8
@@ -43,6 +43,7 @@ https://livestream10.sunnxt.com/DolbyVision/SunTV_HDR/SunTV_HDR_Endpoints/SunTV-
 https://fl3.moveonjoy.com/WILLOW_CRICKET/index.m3u8
 #EXTINF:-1 tvg-id="wilowsports" tvg-logo="https://i.imgur.com/v7nSm7M.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+
 
 
 
