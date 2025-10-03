@@ -2,4 +2,4 @@
 
 Free Live TV for Sri Lankans and Sri Lankan Nationals Living Aboard.
 
-Watch LIVE - https://rupa.garden
+Watch Sri Lanka TV LIVE - https://rupa.garden
