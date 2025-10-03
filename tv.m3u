@@ -19,6 +19,8 @@ https://edge3-moblive.yuppcdn.net/trans1sd/smil:vatv07.smil/playlist.m3u8
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:tv111.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="startamil" tvg-logo="https://i.imgur.com/5uMwbSv.png" group-title="Sri Lanka",Star Tamil
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="athavan" tvg-logo="https://i.imgur.com/npgbBjK.png" group-title="Sri Lanka",Athavan TV
+https://oj7lnxonyg82-hls-live.5centscdn.com/md5=4NvtbhQwCPSjm9ZHQmRn8Q&path=%2Fathavan%2F557a2fa47edc99a633852e9ec3acd716.sdp&expires=1759504656/athavan/557a2fa47edc99a633852e9ec3acd716.sdp/playlist.m3u8
 #EXTINF:-1 tvg-id="ceyflix" tvg-logo="https://i.imgur.com/CjWhwde.png" group-title="Australia" ,CeyFLiX
 https://fastchannel.mdc.akamaized.net/live_df95d60098b711ee84ce95aebe582ac2/playlist.m3u8
 #EXTINF:-1 tvg-id="finn" tvg-logo="https://i.imgur.com/098VtkO.png" group-title="USA" ,FINN TV
@@ -35,6 +37,7 @@ https://segment.yuppcdn.net/240122/kalaignartv/240122/kalaignartv_1800/chunks.m3
 https://livestream10.sunnxt.com/DolbyVision/SunTV_HDR/SunTV_HDR_Endpoints/SunTV-HDR10-IN-index.m3u8
 #EXTINF:-1 tvg-id="wilowsports" tvg-logo="https://i.imgur.com/hn1aFeJ.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+
 
 
 
