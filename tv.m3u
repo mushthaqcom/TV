@@ -7,14 +7,16 @@ https://edge4-moblive.yuppcdn.net/trans1sd/smil:nettv15.smil/playlist.m3u8
 https://rtmp01.voaplus.com/hls/6x6ik312qk4grfxocfcv.m3u8
 #EXTINF:-1 tvg-id="derana" tvg-logo="https://i.imgur.com/FimjBio.png" group-title="Sri Lanka" ,TV Derana
 https://edge3-moblive.yuppcdn.net/transhd2/smil:detv04.smil/index.m3u8
+#EXTINF:-1 tvg-id="hiru" tvg-logo="https://i.imgur.com/xZcrn6j.png" group-title="Sri Lanka" ,Hiru TV
+https://tv.hiruhost.com:1936/8012/8012/playlist.m3u8
 #EXTINF:-1 tvg-id="swarnavahini" tvg-logo="https://i.imgur.com/eDnNjbl.png" group-title="Sri Lanka" ,Swarnavahini
 https://jk3lz8xklw79-hls-live.5centscdn.com/live/6226f7cbe59e99a90b5cef6f94f966fd.sdp/playlist.m3u8
 #EXTINF:-1 tvg-id="sirasa" tvg-logo="https://i.imgur.com/WRYqRKu.png" group-title="Sri Lanka",Sirasa TV
 https://edge2-moblive.yuppcdn.net/transsd/smil:sirtv09.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="tv1" tvg-logo="https://i.imgur.com/BTERmxX.png" group-title="Sri Lanka",TV 1
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:tv111.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="hiru" tvg-logo="https://i.imgur.com/xZcrn6j.png" group-title="Sri Lanka" ,Hiru TV
-https://tv.hiruhost.com:1936/8012/8012/playlist.m3u8
+#EXTINF:-1 tvg-id="charana" tvg-logo="https://i.imgur.com/Ncdl0BF.png" group-title="Sri Lanka",Charana TV
+https://edge3-moblive.yuppcdn.net/transhd2/smil:chtv05.smil/index.m3u8
 #EXTINF:-1 tvg-id="shakthi" tvg-logo="https://i.imgur.com/aioUkgA.png" group-title="Sri Lanka",Shakthi TV
 https://edge4-moblive.yuppcdn.net/transsd/smil:saktv10.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="vasantham" tvg-logo="https://i.imgur.com/lAM8qcc.png" group-title="Sri Lanka",Vasantham TV
@@ -39,6 +41,7 @@ https://segment.yuppcdn.net/240122/kalaignartv/240122/kalaignartv_1800/chunks.m3
 https://livestream10.sunnxt.com/DolbyVision/SunTV_HDR/SunTV_HDR_Endpoints/SunTV-HDR10-IN-index.m3u8
 #EXTINF:-1 tvg-id="wilowsports" tvg-logo="https://i.imgur.com/hn1aFeJ.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+
 
 
 
