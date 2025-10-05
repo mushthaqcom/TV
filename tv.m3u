@@ -15,6 +15,8 @@ https://jk3lz8xklw79-hls-live.5centscdn.com/live/6226f7cbe59e99a90b5cef6f94f966f
 https://edge2-moblive.yuppcdn.net/transsd/smil:sirtv09.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="tv1" tvg-logo="https://i.imgur.com/BTERmxX.png" group-title="Sri Lanka",TV 1
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:tv111.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="supreme" tvg-logo="https://i.imgur.com/rgaPexo.png" group-title="Sri Lanka",Supreme TV
+https://edge3-moblive.yuppcdn.net/transsd/smil:tnl12.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="charana" tvg-logo="https://i.imgur.com/Ncdl0BF.png" group-title="Sri Lanka",Charana TV
 https://edge3-moblive.yuppcdn.net/transhd2/smil:chtv05.smil/index.m3u8
 #EXTINF:-1 tvg-id="shakthi" tvg-logo="https://i.imgur.com/aioUkgA.png" group-title="Sri Lanka",Shakthi TV
@@ -41,6 +43,7 @@ https://segment.yuppcdn.net/240122/kalaignartv/240122/kalaignartv_1800/chunks.m3
 https://livestream10.sunnxt.com/DolbyVision/SunTV_HDR/SunTV_HDR_Endpoints/SunTV-HDR10-IN-index.m3u8
 #EXTINF:-1 tvg-id="wilowsports" tvg-logo="https://i.imgur.com/hn1aFeJ.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+
 
 
 
