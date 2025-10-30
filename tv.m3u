@@ -1,48 +1,49 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="itn" tvg-logo="https://i.imgur.com/ss86Lue.png" group-title="Sri Lanka",ITN
+#EXTINF:-1 tvg-id="itn" tvg-logo="https://i.imgur.com/FnasdOo.png" group-title="Sri Lanka",ITN
 https://edge4-moblive.yuppcdn.net/transsd/smil:itn43.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="channeleye" tvg-logo="https://i.imgur.com/7DXxEVq.png" group-title="Sri Lanka",Channel Eye
+#EXTINF:-1 tvg-id="channeleye" tvg-logo="https://i.imgur.com/D9mzVGG.png" group-title="Sri Lanka",Channel Eye
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:nettv15.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="siyatha" tvg-logo="https://i.imgur.com/wfAmjg4.png" group-title="Sri Lanka" ,Siyatha TV
+#EXTINF:-1 tvg-id="siyatha" tvg-logo="https://i.imgur.com/5GPLGiK.png" group-title="Sri Lanka" ,Siyatha TV
 https://rtmp01.voaplus.com/hls/6x6ik312qk4grfxocfcv.m3u8
-#EXTINF:-1 tvg-id="derana" tvg-logo="https://i.imgur.com/FimjBio.png" group-title="Sri Lanka" ,TV Derana
+#EXTINF:-1 tvg-id="derana" tvg-logo="https://i.imgur.com/0sPZOuO.png" group-title="Sri Lanka" ,TV Derana
 https://edge3-moblive.yuppcdn.net/transhd2/smil:detv04.smil/index.m3u8
-#EXTINF:-1 tvg-id="hiru" tvg-logo="https://i.imgur.com/xZcrn6j.png" group-title="Sri Lanka" ,Hiru TV
+#EXTINF:-1 tvg-id="hiru" tvg-logo="https://i.imgur.com/IrIPqOw.png" group-title="Sri Lanka" ,Hiru TV
 https://tv.hiruhost.com:1936/8012/8012/playlist.m3u8
-#EXTINF:-1 tvg-id="swarnavahini" tvg-logo="https://i.imgur.com/eDnNjbl.png" group-title="Sri Lanka" ,Swarnavahini
+#EXTINF:-1 tvg-id="swarnavahini" tvg-logo="https://i.imgur.com/GVafE1t.png" group-title="Sri Lanka" ,Swarnavahini
 https://jk3lz8xklw79-hls-live.5centscdn.com/live/6226f7cbe59e99a90b5cef6f94f966fd.sdp/playlist.m3u8
-#EXTINF:-1 tvg-id="sirasa" tvg-logo="https://i.imgur.com/WRYqRKu.png" group-title="Sri Lanka",Sirasa TV
+#EXTINF:-1 tvg-id="sirasa" tvg-logo="https://i.imgur.com/fp10REZ.png" group-title="Sri Lanka",Sirasa TV
 https://edge2-moblive.yuppcdn.net/transsd/smil:sirtv09.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="tv1" tvg-logo="https://i.imgur.com/BTERmxX.png" group-title="Sri Lanka",TV 1
+#EXTINF:-1 tvg-id="tv1" tvg-logo="https://i.imgur.com/Mllj8zY.png" group-title="Sri Lanka",TV 1
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:tv111.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="supreme" tvg-logo="https://i.imgur.com/rgaPexo.png" group-title="Sri Lanka",Supreme TV
+#EXTINF:-1 tvg-id="supreme" tvg-logo="https://i.imgur.com/hfCMWay.png" group-title="Sri Lanka",Supreme TV
 https://edge3-moblive.yuppcdn.net/transsd/smil:tnl12.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="charana" tvg-logo="https://i.imgur.com/Ncdl0BF.png" group-title="Sri Lanka",Charana TV
+#EXTINF:-1 tvg-id="charana" tvg-logo="https://i.imgur.com/kcJbwz6.png" group-title="Sri Lanka",Charana TV
 https://edge3-moblive.yuppcdn.net/transhd2/smil:chtv05.smil/index.m3u8
-#EXTINF:-1 tvg-id="shakthi" tvg-logo="https://i.imgur.com/aioUkgA.png" group-title="Sri Lanka",Shakthi TV
+#EXTINF:-1 tvg-id="shakthi" tvg-logo="https://i.imgur.com/jWLpxUC.png" group-title="Sri Lanka",Shakthi TV
 https://edge4-moblive.yuppcdn.net/transsd/smil:saktv10.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="vasantham" tvg-logo="https://i.imgur.com/lAM8qcc.png" group-title="Sri Lanka",Vasantham TV
+#EXTINF:-1 tvg-id="vasantham" tvg-logo="https://i.imgur.com/o0JdjlL.png" group-title="Sri Lanka",Vasantham TV
 https://edge3-moblive.yuppcdn.net/trans1sd/smil:vatv07.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="startamil" tvg-logo="https://i.imgur.com/5uMwbSv.png" group-title="Sri Lanka",Star Tamil
+#EXTINF:-1 tvg-id="startamil" tvg-logo="https://i.imgur.com/geKOjsh.png" group-title="Sri Lanka",Star Tamil
 https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="athavan" tvg-logo="https://i.imgur.com/npgbBjK.png" group-title="Sri Lanka",Athavan TV
+#EXTINF:-1 tvg-id="athavan" tvg-logo="https://i.imgur.com/vkYI2ke.png" group-title="Sri Lanka",Athavan TV
 https://oj7lnxonyg82-hls-live.5centscdn.com/md5=lmg-swFoh7P2jbMDXZSZgg&path=%2Fathavan%2F557a2fa47edc99a633852e9ec3acd716.sdp&expires=1759685764/athavan/557a2fa47edc99a633852e9ec3acd716.sdp/playlist.m3u8
-#EXTINF:-1 tvg-id="ceyflix" tvg-logo="https://i.imgur.com/CjWhwde.png" group-title="Australia" ,CeyFLiX
+#EXTINF:-1 tvg-id="ceyflix" tvg-logo="https://i.imgur.com/EDfiODq.png" group-title="Australia" ,CeyFLiX
 https://fastchannel.mdc.akamaized.net/live_df95d60098b711ee84ce95aebe582ac2/playlist.m3u8
-#EXTINF:-1 tvg-id="finn" tvg-logo="https://i.imgur.com/098VtkO.png" group-title="USA" ,FINN TV
+#EXTINF:-1 tvg-id="finn" tvg-logo="https://i.imgur.com/JcMNgAf.png" group-title="USA" ,FINN TV
 https://249063.global.ssl.fastly.net/68c30e9150bf7e9693d0cfa6/live_733146b095af11f0aa01bd7f7bc24713/index.m3u8
-#EXTINF:-1 tvg-id="SooriyanTV.ca" tvg-logo="https://i.imgur.com/wuhnpLL.png" group-title="Canada",Sooriyan TV
+#EXTINF:-1 tvg-id="SooriyanTV.ca" tvg-logo="https://i.imgur.com/Mz35V2x.png" group-title="Canada",Sooriyan TV
 https://cdn.jwplayer.com/videos/1m0nMXhZ-3SDdwqdV.m3u8
-#EXTINF:-1 tvg-id="SirippoliTV.in@SD" tvg-logo="https://i.imgur.com/onzVkzV.png" group-title="India",Sirippoli TV
+#EXTINF:-1 tvg-id="SirippoliTV.in@SD" tvg-logo="https://i.imgur.com/7ACCmwI.png" group-title="India",Sirippoli TV
 https://segment.yuppcdn.net/240122/siripoli/playlist.m3u8
-#EXTINF:-1 tvg-id="RajMusixTamil.in@SD" tvg-logo="https://i.imgur.com/hKoxFcE.png" group-title="India",Raj Musix Tamil
+#EXTINF:-1 tvg-id="RajMusixTamil.in@SD" tvg-logo="https://i.imgur.com/j1TxzIU.png" group-title="India",Raj Musix Tamil
 https://livestream.rajtv.tv/hlslive/Admin/px08241087/live/Raj_Musix/master_1.m3u8
-#EXTINF:-1 tvg-id="kalaignar" tvg-logo="https://i.imgur.com/5Nl7oQM.png" group-title="India",Kalaignar TV
+#EXTINF:-1 tvg-id="kalaignar" tvg-logo="https://i.imgur.com/mtc5n6G.png" group-title="India",Kalaignar TV
 https://segment.yuppcdn.net/240122/kalaignartv/240122/kalaignartv_1800/chunks.m3u8
-#EXTINF:-1 tvg-id="suntv" tvg-logo="https://i.imgur.com/kyp12ET.png" group-title="India",Sun TV
+#EXTINF:-1 tvg-id="suntv" tvg-logo="https://i.imgur.com/FuPfSEA.png" group-title="India",Sun TV
 https://livestream10.sunnxt.com/DolbyVision/SunTV_HDR/SunTV_HDR_Endpoints/SunTV-HDR10-IN-index.m3u8
-#EXTINF:-1 tvg-id="wilowsports" tvg-logo="https://i.imgur.com/hn1aFeJ.png" group-title="Sports",Willow Sports
+#EXTINF:-1 tvg-id="wilowsports" tvg-logo="https://i.imgur.com/JcByFQo.png" group-title="Sports",Willow Sports
 https://amg01269-amg01269c1-firetv-us-5377.playouts.now.amagi.tv/playlist.m3u8
+
 
 
 
